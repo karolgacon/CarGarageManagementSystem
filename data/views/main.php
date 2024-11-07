@@ -17,13 +17,13 @@
                     <h1 class="mainContainer__rignt--name">Car Garage Management System</h1>
                     <img src="data/img/logo.svg" alt="Logo" class="mainContainer__left--logo">
                 </div>
-                <div class="mainContainer__left--line">
-                    <p class="mainContainer__left--text">Car Garage Management System is a simple application for managing tasks in garage.</p>
-                    <form method="GET">
-                        <button class="mainContainer__right--button" formaction="login">Sign in</button>
-                        <button class="mainContainer__right--button" formaction="register">Sign up</button>
-                    </form>
-                </div>
+            </div>
+            <div class="mainContainer__left--line">
+                <p class="mainContainer__left--text">Car Garage Management System is a simple application for managing tasks in garage.</p>
+                <form method="GET">
+                    <button class="mainContainer__right--button" formaction="login">Sign in</button>
+                    <button class="mainContainer__right--button" formaction="register">Sign up</button>
+                </form>
             </div>
         </div>
     </body>
