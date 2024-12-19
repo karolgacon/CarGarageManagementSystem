@@ -11,6 +11,8 @@ services:
       - .:/app/
     links:
       - php
+    networks:
+      - pg-network
 
   php:
     build:
@@ -18,15 +20,22 @@ services:
       dockerfile: docker/php/Dockerfile
     volumes:
       - .:/app/
-
-  db:
-    build:
-      context: .
-      dockerfile: docker/db/Dockerfile
-    ports:
-      - "5434:5432"
     networks:
       - pg-network
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/postgres/:/docker-entrypoint-initdb.d/
+    networks:
+      - pg-network
+
 
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -37,6 +46,8 @@ services:
       - "5050:80"
     networks:
       - pg-network
+    depends_on:
+      - db
 
 networks:
   pg-network:

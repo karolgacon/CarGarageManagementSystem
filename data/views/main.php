@@ -22,9 +22,9 @@
                         <h1 class="decorator">Car Garage Management System</h1>
                         <p class="mainContainer__left--text">is a simple application for managing tasks in garage.</p>
                     </div>
-                    <form method="GET">
-                        <button class="mainContainer__right--button" formaction="login">Log in</button>
-                        <button class="mainContainer__right--button" formaction="register">Sign up</button>
+                    <form>
+                        <button type="button" class="mainContainer__right--button" onclick="window.location.href='login';">Log in</button>
+                        <button type="button" class="mainContainer__right--button" onclick="window.location.href='register';">Sign up</button>
                     </form>
                 </div>
             </div>

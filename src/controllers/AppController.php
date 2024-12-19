@@ -18,7 +18,7 @@ class AppController {
         return $this->request === 'POST';
     }
 
-    protected function render(string $template = null, array $variables = [])
+    protected function render(string $template , array $variables = [])
     {
         $templatePath = 'data/views/'. $template.'.php';
         $output = 'File not found';

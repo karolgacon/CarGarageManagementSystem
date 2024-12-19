@@ -11,7 +11,7 @@ class DefaultController extends AppController {
             $this->render('main');
             return;
         }
-        $this->render('mainview');
+        $this->render('main');
     }
 
     public function user() {
