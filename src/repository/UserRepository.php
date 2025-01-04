@@ -25,14 +25,9 @@ class UserRepository extends Repository
             $user['email'],
             $user['password'],
             $user['surname'],
-            $user['name']
+            $user['name'],
+            $user['role']
         );
-    }
-
-    public function addUser($email, $password)
-    {
-        $id = count($this->users) + 1;
-        $this->users[] = new User($id, $email, $password, 1, false);
     }
 
     public function changePassword($password, $id)
@@ -45,4 +40,31 @@ class UserRepository extends Repository
         }
         return false;
     }
+
+    public function getAllUsers(): array {
+        $stmt = $this->database->connect()->prepare("SELECT * FROM users");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function addUser(string $email, string $password, string $name, string $surname, string $role, ?string $photo): void {
+        $stmt = $this->database->connect()->prepare("
+        INSERT INTO users (email, password, name, surname, role, photo)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ");
+        $stmt->execute([$email, password_hash($password, PASSWORD_BCRYPT), $name, $surname, $role, $photo]);
+    }
+
+    public function deleteUser(int $id): void {
+        $stmt = $this->database->connect()->prepare("DELETE FROM users WHERE id = ?");
+        $stmt->execute([$id]);
+    }
+
+    public function updateUser(int $id, string $email, string $name, string $surname, string $role, ?string $photo): void {
+        $stmt = $this->database->connect()->prepare("
+        UPDATE users SET email = ?, name = ?, surname = ?, role = ?, photo = ? WHERE id = ?
+    ");
+        $stmt->execute([$email, $name, $surname, $role, $photo, $id]);
+    }
+
 }

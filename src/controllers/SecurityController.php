@@ -32,6 +32,7 @@ class SecurityController extends AppController {
         }
 
         $_SESSION["email"] = $user->getEmail();
+        $_SESSION['user_role'] = $user->getRole();
         return $this->render('mainview');
     }
 }
