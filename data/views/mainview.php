@@ -1,42 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Main View">
-    <meta name="keywords" content="Main View">
-    <meta name="author" content="Karol Gacon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main View</title>
-    <link rel="stylesheet" href="data/css/main.css">
-    <link rel="stylesheet" href="data/css/login.css">
-    <link rel="stylesheet" href="data/css/mainview.css">
-    <script src="data/js/mainview.js" defer></script>
+    <title>Dashboard - System Zarządzania Warsztatem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css"> <!-- FullCalendar CSS -->
+    <link rel="stylesheet" href="/data/css/mainview.css">
 </head>
-<body onload="loadContent('views/repairs.php', 'repairs')">
-<div class="mainContainer">
-    <aside class="sidebar">
-        <nav>
-            <ul>
-                <?php if ($_SESSION['user_role'] === 'admin'): ?>
-                    <li><a href="#" id="users" onclick="loadContent('/data/views/users.php', 'users')">Users</a></li>
-                    <li><a href="#" id="vehicles" onclick="loadContent('/data/views/vehicles.php', 'vehicles')">Vehicles</a></li>
-                    <li><a href="#" id="car_parts" onclick="loadContent('/data/views/car_parts.php', 'car_parts')">Car Parts</a></li>
-                    <li><a href="#" id="calendar" onclick="loadContent('/data/views/calendar.php', 'calendar')">Calendar</a></li>
-                    <li><a href="#" id="invoice" onclick="loadContent('/data/views/invoice.php', 'invoice')">Generate Invoice</a></li>
-                    <li><a href="#" id="repairs" onclick="loadContent('/data/views/repairs.php', 'repairs')" class="active">Repairs</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-    </aside>
-    <main class="content">
-        <header>
-            <h1>Welcome to the Workshop Management System</h1>
-            <p>You are logged in as <?php echo $_SESSION['email']; ?>.</p>
-        </header>
-        <div id="contentContainer">
-            <p>Select a menu option to see its content.</p>
+<body>
+<?php include __DIR__ . '/../partials/sidebar.php'; ?>
+<?php include __DIR__ . '/../partials/topnavbar.php'; ?>
+<!-- Main Content -->
+<div class="content" style="margin-left: 250px; padding: 20px;">
+    <div class="container">
+        <h1 class="mb-4 text-center">Dashboard</h1>
+        <!-- Statystyki w kafelkach -->
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="card text-center text-white" style="background-color: #27ae60;">
+                    <div class="card-body">
+                        <h3>📦</h3>
+                        <h5>Liczba pojazdów</h5>
+                        <p class="display-4"><?php echo $vehiclesCount; ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center text-white" style="background-color: #f39c12;">
+                    <div class="card-body">
+                        <h3>👥</h3>
+                        <h5>Użytkownicy</h5>
+                        <p class="display-4"><?php echo $usersCount; ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center text-white" style="background-color: #e74c3c;">
+                    <div class="card-body">
+                        <h3>🔧</h3>
+                        <h5>Zlecenia</h5>
+                        <p class="display-4"><?php echo $servicesCount; ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center text-white" style="background-color: #2980b9;">
+                    <div class="card-body">
+                        <h3>💵</h3>
+                        <h5>Faktury</h5>
+                        <p class="display-4"><?php echo $invoicesCount; ?></p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </main>
+
+        <!-- Kalendarz -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Kalendarz wydarzeń</div>
+                    <div class="card-body">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<footer class="footer mt-auto py-3 bg-dark text-light text-center">
+    <div class="container">
+        <span>© 2025 Garage Master. All Rights Reserved.</span>
+    </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script> <!-- FullCalendar JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="/data/js/calendar.js"></script>
 </body>
 </html>

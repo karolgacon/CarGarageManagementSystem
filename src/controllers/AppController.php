@@ -22,6 +22,7 @@ class AppController {
     {
         $templatePath = 'data/views/'. $template.'.php';
         $output = 'File not found';
+        $variables['loggedInUser'] = $this->getLoggedInUser();
                 
         if(file_exists($templatePath)){
             extract($variables);
@@ -30,6 +31,17 @@ class AppController {
             include $templatePath;
             $output = ob_get_clean();
         }
+
         print $output;
     }
+
+    public function getLoggedInUser(): ?User {
+        if (!isset($_SESSION['user_id'])) {
+            return null;
+        }
+
+        $userRepository = new UserRepository();
+        return $userRepository->getUserById((int)$_SESSION['user_id']);
+    }
+
 }

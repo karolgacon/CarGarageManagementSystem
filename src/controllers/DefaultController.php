@@ -19,15 +19,7 @@ class DefaultController extends AppController {
             $this->render('main');
             return;
         }
-        $this->render('user');
-    }
-
-    public function mainview() {
-        if (!isset($_SESSION['id'])) {
-            $this->render('main');
-            return;
-        }
-        $this->render('mainview');
+        $this->render('users');
     }
 
      public function login() {

@@ -8,31 +8,60 @@ class SecurityController extends AppController {
 
     public function login()
     {
+        // Inicjalizacja sesji (jeśli jeszcze nie została uruchomiona)
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         $userRepository = new UserRepository();
 
-        if(!$this->isPost()){
+        // Renderowanie widoku logowania, jeśli metoda nie jest POST
+        if (!$this->isPost()) {
             return $this->render('login');
         }
 
         $email = $_POST["email"] ?? "";
-        $password = $_POST["password"] ?? null;
+        $password = $_POST["password"] ?? "";
 
+        // Pobieranie użytkownika z repozytorium
         $user = $userRepository->getUser($email);
 
-        if(!$user) {
-            return $this->render('login', ['messages' => ['User not exist']]);
+        if (!$user) {
+            return $this->render('login', ['messages' => ['User does not exist']]);
         }
 
-        if($user->getEmail() !== $email) {
-            return $this->render('login', ['messages' => ['User not exist']]);
-        }
-
-        if($user->getPassword() !== $password) {
+        // Weryfikacja hasła (proste porównanie)
+        if (!password_verify($password, $user->getPassword())) {
             return $this->render('login', ['messages' => ['Wrong password']]);
         }
 
+        // Ustawienie zmiennych sesji po poprawnym logowaniu
         $_SESSION["email"] = $user->getEmail();
         $_SESSION['user_role'] = $user->getRole();
-        return $this->render('mainview');
+        $_SESSION['user_id'] = $user->getId();
+
+
+        // Przekierowanie do głównego widoku
+        header('Location: /mainview');
+        exit();
     }
+
+    public function getLoggedInUser(): ?User {
+        if (!isset($_SESSION['user_id'])) {
+            return null;
+        }
+
+        $userRepository = new UserRepository();
+        return $userRepository->getUserById((int)$_SESSION['user_id']);
+    }
+
+    public function logout() {
+        session_unset();
+        session_destroy();
+
+        header("Location: /login");
+        exit();
+    }
+
+
 }
