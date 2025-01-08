@@ -186,6 +186,18 @@ class ServiceRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getServicesByStatus(string $status): array
+    {
+        $stmt = $this->database->connect()->prepare("
+        SELECT * 
+        FROM services
+        WHERE status = :status
+    ");
+        $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 
 }

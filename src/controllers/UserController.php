@@ -81,6 +81,24 @@ class UserController extends AppController {
         }
 
         if ($this->isPost()) {
+            $photoPath = $_POST['current_photo'] ?? null;
+
+            // Obsługa nowego zdjęcia, jeśli zostało przesłane
+            if (!empty($_FILES['photo']['name'])) {
+                $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                if (!in_array($_FILES['photo']['type'], $allowedTypes)) {
+                    $this->render('users_edit', ['messages' => ['Invalid file type. Allowed types: JPEG, PNG, GIF.']]);
+                    return;
+                }
+
+                if ($_FILES['photo']['size'] > 5 * 1024 * 1024) { // Limit 5 MB
+                    $this->render('users_edit', ['messages' => ['File size must not exceed 5MB.']]);
+                    return;
+                }
+
+                $photoPath = $this->uploadPhoto($_FILES['photo']);
+            }
+
             // Sprawdź, czy hasło jest puste
             $password = !empty($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : null;
 
@@ -90,7 +108,7 @@ class UserController extends AppController {
                 'name' => $_POST['name'] ?? '',
                 'surname' => $_POST['surname'] ?? '',
                 'role' => $_POST['role'] ?? 'user',
-                'photo' => $_POST['current_photo'] ?? null
+                'photo' => $photoPath
             ];
 
             // Jeśli hasło jest puste, usuń je z danych do aktualizacji

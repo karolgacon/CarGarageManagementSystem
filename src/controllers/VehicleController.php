@@ -76,7 +76,7 @@ class VehicleController extends AppController {
 
 
     public function delete() {
-        $id = (int)$_GET['id'];
+        $id = (int)$_GET['?id'];
         $this->vehicleRepository->deleteVehicle($id);
         header('Location: /vehicles');
     }
