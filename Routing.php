@@ -6,6 +6,9 @@ require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/MainController.php';
 require_once 'src/controllers/InventoryController.php';
 require_once 'src/controllers/UserController.php';
+require_once 'src/controllers/VehicleController.php';
+require_once 'src/controllers/ServiceController.php';
+require_once 'src/controllers/InvoiceController.php';
 class Router {
 
     public static $routes;

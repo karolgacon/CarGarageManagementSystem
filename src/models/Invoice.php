@@ -1,19 +1,23 @@
 <?php
+class Invoice {
+    private int $id;
+    private int $serviceId;
+    private string $invoiceNumber;
+    private float $amount;
+    private string $status;
+    private string $createdAt;
 
+    private float $vat;
+    private string $statusUpdatedAt;
 
-class Invoice
-{
-    private $id;
-    private $amount;
-    private $status;
-    private $issueDate;
-
-    public function __construct(int $id, float $amount, string $status, string $issueDate)
+    public function getStatusUpdatedAt(): string
     {
-        $this->id = $id;
-        $this->amount = $amount;
-        $this->status = $status;
-        $this->issueDate = $issueDate;
+        return $this->statusUpdatedAt;
+    }
+
+    public function setStatusUpdatedAt(string $statusUpdatedAt): void
+    {
+        $this->statusUpdatedAt = $statusUpdatedAt;
     }
 
     public function getId(): int
@@ -21,9 +25,39 @@ class Invoice
         return $this->id;
     }
 
+    public function getVat(): float
+    {
+        return $this->vat;
+    }
+
+    public function setVat(float $vat): void
+    {
+        $this->vat = $vat;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getServiceId(): int
+    {
+        return $this->serviceId;
+    }
+
+    public function setServiceId(int $serviceId): void
+    {
+        $this->serviceId = $serviceId;
+    }
+
     public function getAmount(): float
     {
         return $this->amount;
+    }
+
+    public function setAmount(float $amount): void
+    {
+        $this->amount = $amount;
     }
 
     public function getStatus(): string
@@ -31,8 +65,27 @@ class Invoice
         return $this->status;
     }
 
-    public function getIssueDate(): string
+    public function setStatus(string $status): void
     {
-        return $this->issueDate;
+        $this->status = $status;
+    }
+
+    // Gettery i settery...
+
+    public function getInvoiceNumber(): string {
+        return $this->invoiceNumber;
+    }
+
+    public function setInvoiceNumber(string $invoiceNumber): void {
+        $this->invoiceNumber = $invoiceNumber;
+    }
+
+    public function getCreatedAt(): string {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(string $createdAt): void {
+        $this->createdAt = $createdAt;
     }
 }
+

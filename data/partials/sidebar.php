@@ -6,11 +6,17 @@
     </div>
     <div class="menu">
         <a href="mainview">Dashboard</a>
-        <a href="inventory">Inventory</a>
-        <a href="users" class="active">Users</a>
+        <?php if ($_SESSION['user_role'] === 'admin'): ?>
+            <a href="inventory">Inventory</a>
+        <?php endif; ?>
+        <?php if ($_SESSION['user_role'] === 'admin'): ?>
+            <a href="users" class="active">Users</a>
+        <?php endif; ?>
         <a href="vehicles">Vehicles</a>
         <a href="services">Services</a>
         <a href="invoices">Invoices</a>
-        <a href="#">Settings</a>
+        <?php if ($_SESSION['user_role'] === 'admin'): ?>
+            <a href="#">Settings</a>
+        <?php endif; ?>
     </div>
 </div>

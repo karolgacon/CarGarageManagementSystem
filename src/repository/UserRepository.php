@@ -79,10 +79,9 @@ class UserRepository extends Repository {
         VALUES (:email, :password, :name, :surname, :role, :photo)
     ');
 
-        $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
 
         $stmt->bindParam(':email', $data['email']);
-        $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':password', $data['password']);
         $stmt->bindParam(':name', $data['name']);
         $stmt->bindParam(':surname', $data['surname']);
         $stmt->bindParam(':role', $data['role']);
@@ -155,5 +154,6 @@ class UserRepository extends Repository {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
     }
+
 
 }

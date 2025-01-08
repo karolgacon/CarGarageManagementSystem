@@ -31,7 +31,7 @@ class SecurityController extends AppController {
         }
 
         // Weryfikacja hasła (proste porównanie)
-        if (!password_verify($password, $user->getPassword())) {
+        if (!(password_verify($password, $user->getPassword()))) {
             return $this->render('login', ['messages' => ['Wrong password']]);
         }
 
@@ -62,6 +62,72 @@ class SecurityController extends AppController {
         header("Location: /login");
         exit();
     }
+
+    public function register() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $userRepository = new UserRepository();
+
+        // Renderowanie widoku rejestracji, jeśli metoda nie jest POST
+        if (!$this->isPost()) {
+            return $this->render('register');
+        }
+
+        $email = $_POST["email"] ?? "";
+        $password = $_POST["password"] ?? "";
+        $name = $_POST["name"] ?? "";
+        $surname = $_POST["surname"] ?? "";
+
+        // Walidacja danych wejściowych
+        $messages = [];
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $messages[] = "Invalid email format";
+        }
+
+        if (strlen($password) < 6) {
+            $messages[] = "Password must be at least 6 characters long";
+        }
+
+        if (empty($name)) {
+            $messages[] = "Name is required";
+        }
+
+        if (empty($surname)) {
+            $messages[] = "Surname is required";
+        }
+
+        if (!empty($messages)) {
+            return $this->render('register', ['messages' => $messages]);
+        }
+
+        // Sprawdzenie, czy użytkownik już istnieje
+        if ($userRepository->getUser($email)) {
+            return $this->render('register', ['messages' => ['User with this email already exists']]);
+        }
+
+        // Hashowanie hasła
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+
+        // Tworzenie nowego użytkownika z domyślną rolą "user"
+        $newUser = [
+            'email' => $email,
+            'password' => $hashedPassword,
+            'name' => $name,
+            'surname' => $surname,
+            'role' => 'user', // Domyślna rola
+            'photo' => null // Opcjonalne zdjęcie
+        ];
+
+        $userRepository->addUser($newUser);
+
+        // Przekierowanie na stronę logowania
+        header('Location: /login');
+        exit();
+    }
+
 
 
 }
