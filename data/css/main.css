@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: Montserrat, sans-serif;
+  background: linear-gradient(
+    114deg,
+    rgba(255, 106, 7, 1) 0%,
+    rgba(195, 79, 1, 1) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+
+.mainContainer {
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 50vh;
+  width: 70vw;
+  background-color: #f5f5f5;
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+  border-radius: 15px;
+  padding: 15px 20px;
+}
+
+/* .mainContainer__right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
+} */
+
+.mainContainer__right--title {
+  text-align: center;
+  padding: 10px;
+}
+
+.mainContainer__rignt--name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.mainContainer__left {
+  height: 1000%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.mainContainer__left--line {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.mainContainer__left--text {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.mainContainer__right--button {
+  width: 100%;
+  background-color: #67a726;
+  color: #fff;
+  padding: 15px 20px;
+  border: 2px solid #67a726;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.mainContainer__right--button:hover {
+  background-color: #55901b;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 40%;
+  width: 100%;
+}
+
+ .decorator{
+    text-align: center;
+    font-size: 2.7rem;
+    color:rgba(255, 106, 7, 1);
+    margin-bottom: 15px;
+    padding: 0 15px;
+  }
+
+@media screen and (min-width: 768px) {
+  body {
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(
+      114deg,
+      rgba(255, 106, 7, 1) 0%,
+      rgba(195, 79, 1, 1) 100%
+    );
+  }
+  .mainContainer {
+    background: none;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .mainContainer__right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+  }
+
+  .mainContainer__right--title {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    height: 70%;
+    background-image: url("../img/41941364_8959247.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 1;
+    padding: 10px 30px;
+  }
+
+    .mainContainer__right--tile::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .mainContainer__rignt--name {
+    display: none;
+  }
+
+  .mainContainer__left {
+    align-items: flex-start;
+    width: 50%;
+    height: 100%;
+    padding: 0;
+  }
+
+  .mainContainer__left--line {
+    flex-direction: column;
+    justify-content: space-around;
+    height: 70%;
+    width: 75%;
+    background-color: #f5f5f5;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    padding: 10px 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  .decorator{
+    text-align: center;
+    font-size: 3rem;
+    color:rgba(255, 106, 7, 1);
+    margin-bottom: 30px;
+    padding: 0 15px;
+  }
+  .mainContainer__left--text {
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 0 15px;
+  }
+
+
+  form {
+    margin-top: 30px;
+    width: 80%;
+    justify-content: center;
+  }
+
+  .mainContainer__right--button {
+    width: 100%;
+    padding: 20px;
+    margin: 15px;
+    font-size: 1.2rem;
+    font-weight: bolder;
+  }
+}
+
+/* @media screen and (min-width: 1900px) {
+  .mainContainer__right--title {
+    width: 50%;
+  }
+
+  .mainContainer__left--line {
+    width: 50%;
+  }
+  
+} */

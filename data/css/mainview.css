@@ -1,0 +1,105 @@
+/* Sidebar styles */
+/* Styl dla layoutu z klejoną stopką */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1; /* Zajmij pozostałą przestrzeń między nagłówkiem a stopką */
+}
+
+.footer {
+    background-color: #f8f9fa; /* Kolor tła stopki */
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    z-index: -100;
+}
+
+.text-center a {
+    margin: 10px;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    border: 2px solid #ccc;
+    padding: 5px;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    background-color: #343a40;
+    color: white;
+}
+.sidebar a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block;
+}
+.sidebar a:hover {
+    background-color: #495057;
+}
+.sidebar .logo {
+    text-align: center;
+    padding: 20px;
+}
+.sidebar .menu {
+    margin-top: 20px;
+}
+
+/* Navbar styles */
+.navbar {
+    margin-left: 250px;
+}
+.profile-dropdown {
+    position: absolute;
+    right: 10px;
+}
+
+.dropdown-menu {
+    margin-top: 200px;
+}
+
+/* Main content */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+.fc-event {
+    background-color: #2980b9; /* Kolor tła wydarzenia */
+    color: white;            /* Kolor tekstu */
+    border: none;            /* Usunięcie obramowania */
+    border-radius: 5px;      /* Zaokrąglone rogi */
+    padding: 5px;            /* Odstępy wewnętrzne */
+    font-size: 14px;         /* Rozmiar czcionki */
+    white-space: nowrap;     /* Zapobiegaj zawijaniu tekstu */
+    overflow: hidden;        /* Ukryj nadmiar */
+    text-overflow: ellipsis; /* Dodaj "..." w przypadku zbyt długiego tekstu */
+    cursor: pointer !important; /* Wymuszony kursor pointer */
+    transition: background-color 0.3s ease;
+}
+
+.fc-event:hover {
+    background-color: rgb(17, 98, 168); /* Subtelne niebieskie tło */
+}
+
+.fc-time {
+    font-weight: bold;       /* Wyróżnienie godziny */
+}
+
+.fc-daygrid-event-dot {
+    display: none;           /* Ukryj kropkę przy wydarzeniach */
+}
+
