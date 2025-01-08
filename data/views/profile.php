@@ -16,7 +16,7 @@
         <h1 class="text-center mb-4">Profile</h1>
         <div class="card mb-4">
             <div class="card-body text-center">
-                <img src="<?php echo $photo; ?>" alt="Profile Photo" class="rounded-circle" style="width: 150px; height: 150px;">
+                <img src="<?php echo htmlspecialchars($loggedInUser->getPhoto() ?? '/data/img/default-avatar.png'); ?>" alt="Profile Photo" class="rounded-circle" style="width: 150px; height: 150px;">
                 <h3 class="mt-3"><?php echo htmlspecialchars($loggedInUser->getName()) . ' ' . htmlspecialchars($loggedInUser->getSurname()); ?></h3>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($loggedInUser->getEmail()); ?></p>
                 <p><strong>Role:</strong> <?php echo htmlspecialchars($loggedInUser->getRole()); ?></p>
