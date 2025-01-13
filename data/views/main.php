@@ -7,8 +7,8 @@
         <meta name="keywords" content="In progress">
         <meta name="author" content="Karol Gacon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="data/css/main.css">
-        <script src="data/js/main.js"></script>
+        <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">-->
+        <link rel="stylesheet" href="/data/css/pure.css">
     </head>
     <body>
         <div class="mainContainer">
@@ -29,5 +29,7 @@
                 </div>
             </div>
         </div>
+        <script src="data/js/main.js"></script>
+        <script src="/data/js/pure.js"></script>
     </body>
 </html>

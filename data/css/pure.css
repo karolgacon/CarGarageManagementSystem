@@ -60,7 +60,7 @@ body {
     text-align: center;
 }
 
-/* Margines od góry */
+/* Marginesy pomocnicze */
 .mt-4 {
     margin-top: 2rem;
 }
@@ -73,10 +73,13 @@ body {
 .mb-4 {
     margin-bottom: 2rem;
 }
+
+/* Odstępy między kafelkami itp. */
 .g-4 > * {
-    margin-bottom: 1.5rem; /* odległości między kafelkami itp. */
+    margin-bottom: 1.5rem;
 }
 
+/* ----------- PRZYCISKI .btn ----------- */
 .btn {
     display: inline-block;
     padding: 0.75rem 1.25rem;
@@ -131,32 +134,29 @@ body {
     width: 100%;
 }
 
+/* ----------- TABELKI .table ----------- */
 .table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1rem;
 }
-
 .table th,
 .table td {
     text-align: left;
     padding: 0.75rem;
     border: 1px solid #ddd;
 }
-
 .table thead th {
     background-color: #eee;
 }
-
-/* Możesz użyć .table-bordered, .table-striped itp. */
 .table-bordered th, .table-bordered td {
     border: 1px solid #ddd;
 }
-
 .table-striped tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
+/* ----------- KARTY .card ----------- */
 .card {
     background-color: #fff;
     border-radius: 0.5rem;
@@ -191,10 +191,11 @@ body {
     background-color: #2980b9;
 }
 
+/* ----------- SIDEBAR ----------- */
 .sidebar {
     width: 250px;
     min-height: 100vh; /* aby side-bar rozciągał się na pełną wysokość */
-    position: fixed;  /* przyklejony do lewej */
+    position: fixed;   /* przyklejony do lewej */
     background-color: #343a40;
     color: #fff;
     top: 0;
@@ -220,7 +221,7 @@ body {
     background-color: #495057;
 }
 
-/* Główna nawigacja – uproszczona */
+/* ----------- NAVBAR (upraszczamy) ----------- */
 .navbar {
     margin-left: 250px; /* tyle, co szerokość sidebara */
     background-color: #f8f9fa;
@@ -230,12 +231,14 @@ body {
     z-index: 10;
 }
 
-/* Prawy dropdown (profil) – musimy sami napisać prostą obsługę w JS, jeśli chcemy */
+/* Prawy dropdown (profil) */
 .profile-dropdown {
     position: relative;
 }
+
+/* Domyślnie dropdown niewidoczny */
 .dropdown-menu {
-    display: none; /* domyślnie ukryta */
+    display: none;
     position: absolute;
     top: 2.5rem;
     right: 0;
@@ -257,12 +260,12 @@ body {
     background-color: #eee;
 }
 
+/* ----------- GŁÓWNA TRESĆ .content + STOPKA .footer ----------- */
 .content {
     margin-left: 250px; /* tyle co sidebar */
     padding: 20px;
     flex: 1; /* wypełnij przestrzeń w pionie (jeśli body = flex) */
 }
-
 .footer {
     background-color: #212529;
     color: #fff;
@@ -271,9 +274,9 @@ body {
     margin-top: auto; /* przyklej stopkę na dole */
 }
 
-/* Własne kolory eventów */
+/* ----------- FullCalendar eventy (opcjonalnie) ----------- */
 .fc-event {
-    background-color: #2980b9 !important; /* nadpisanie inline styles (jeśli potrzeba) */
+    background-color: #2980b9 !important;
     color: #fff !important;
     border: none !important;
     border-radius: 5px !important;
@@ -285,6 +288,7 @@ body {
     background-color: #1f6691 !important;
 }
 
+/* ----------- Walidacja (poprzednie) ----------- */
 form.needs-validation input:invalid,
 form.needs-validation select:invalid,
 form.needs-validation textarea:invalid {
@@ -302,12 +306,12 @@ form.needs-validation textarea:valid {
     margin-top: 0.2rem;
     display: none;
 }
-
 /* Gdy formularz ma .was-validated i element jest :invalid => pokaż feedback */
 form.was-validated :invalid ~ .invalid-feedback {
     display: block;
 }
 
+/* Ewentualny tooltip w czystym JS */
 .my-tooltip {
     position: absolute;
     background-color: #333;
@@ -319,42 +323,102 @@ form.was-validated :invalid ~ .invalid-feedback {
     z-index: 9999;
 }
 
-
-/* Przykładowe style dla dropdown – możesz umieścić w 'mainview.css' czy 'pure.css' */
-
-.nav-item.dropdown {
-    position: relative; /* by móc pozycjonować .dropdown-menu */
+/* ----------- DODATKOWE STYLOWANIE FORMULARZY (NOWE) ----------- */
+/* 1) Podstawowy layout formularza */
+form {
+    max-width: 600px;  /* aby formularz nie był zbyt szeroki */
+    margin: 2rem auto 2rem;
 }
 
-/* Domyślnie dropdown niewidoczny */
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: #fff;
-    min-width: 150px;
-    margin-top: 0.5rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    border-radius: 4px;
-    list-style: none;
-    padding: 0.5rem 0;
-    z-index: 10; /* by menu nie chowało się za inne elementy */
+/* Grupowanie pól */
+.form-group {
+    margin-bottom: 1rem;
 }
 
-/* Po nadaniu .show – widać menu */
-.dropdown-menu.show {
+/* Etykiety */
+label {
     display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 
-/* Styl linków w menu */
-.dropdown-item {
+/* Pola input, select, textarea */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
     display: block;
-    padding: 0.5rem 1rem;
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
     color: #333;
-    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ccc; /* delikatniejsza ramka niż 2px */
+    border-radius: 4px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.dropdown-item:hover {
-    background-color: #f2f2f2;
+/* Focus na polu */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2980b9;  /* kolor akcentu */
+    box-shadow: 0 0 3px rgba(41,128,185,0.5);
+}
+
+/* 2) Subtelniejsza walidacja (nadpisanie) – jeśli wolisz */
+form.needs-validation input:invalid,
+form.needs-validation select:invalid,
+form.needs-validation textarea:invalid {
+    border: 1.5px solid #c0392b !important;
+    box-shadow: 0 0 3px rgba(192,57,43,0.3);
+}
+form.needs-validation input:valid,
+form.needs-validation select:valid,
+form.needs-validation textarea:valid {
+    border: 1.5px solid #27ae60 !important;
+    box-shadow: 0 0 3px rgba(39,174,96,0.3);
+}
+
+/* 3) Sekcja przycisków formularza (opcjonalnie) */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.form-actions .btn {
+    margin: 0; /* wyłącz domyślny margines .btn, bo mamy gap */
+}
+
+.container h1{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.ml-4{
+    margin-left: 1.5rem;
+}
+
+
+.action-buttons {
+    display: flex;
+    /*flex-wrap: wrap; !* Pozwala zawijać się wierszami na mniejszych ekranach *!*/
+    align-items: center;
+    gap: 0.5rem;     /* Odstęp między przyciskami */
+}
+
+.action-buttons form {
+    margin: 0;       /* Zabierz ewentualne marginesy domyślne */
+    display: flex;   /* lub inline-flex, by <button> wewnątrz był w linii */
+    align-items: center;
 }

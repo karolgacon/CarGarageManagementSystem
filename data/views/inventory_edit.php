@@ -54,7 +54,7 @@
     </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="/data/js/pure.js"></script>
 <script src="/data/js/formValidation.js"></script>
 </body>
 </html>

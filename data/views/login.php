@@ -33,5 +33,6 @@
             </div>
         </form>
     </div>
+    <script src="/data/js/pure.js"></script>
 </body>
 </html>

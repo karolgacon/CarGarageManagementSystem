@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoices</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/data/css/mainview.css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="/data/css/pure.css">
 </head>
 <body>
 <?php include __DIR__ . '/../partials/sidebar.php'; ?>
 <?php include __DIR__ . '/../partials/topnavbar.php'; ?>
-<div class="container mt-5">
+<div class="content mt-5">
     <h1 class="mb-4 text-center">Invoices</h1>
 
     <!-- Formularz filtrujący -->
@@ -65,6 +65,7 @@
                 </td>
                 <td><?php echo ucfirst($invoice['status']); ?></td>
                 <td>
+                    <div class="action-buttons">
                     <a href="/invoice_details?id=<?php echo $invoice['id']; ?>" class="btn btn-primary btn-sm">Details</a>
                     <form action="/invoice_export" method="POST" target="_blank" class="inline">
                         <input type="hidden" name="id" value="<?php echo $invoice['id']; ?>">
@@ -74,6 +75,7 @@
                     <?php if ($invoice['status'] !== 'paid'): ?>
                         <a href="/invoice_mark_paid?id=<?php echo $invoice['id']; ?>" class="btn btn-success btn-sm">Mark as Paid</a>
                     <?php endif; ?>
+                    </div>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -81,7 +83,7 @@
     </table>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="/data/js/pure.js"></script>
 <script src="/data/js/invoices.js"></script> <!-- Dołączamy plik JavaScript -->
 </body>
 </html>

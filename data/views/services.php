@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/data/css/mainview.css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="/data/css/pure.css">
 </head>
 <body>
 <?php include __DIR__ . '/../partials/sidebar.php'; ?>
@@ -51,7 +51,7 @@
                         <strong>Parts Used:</strong>
                         <ul>
                             <?php foreach ($service['parts'] as $part): ?>
-                                <li>
+                                <li class="ml-4">
                                     <?php echo $part['part_name']; ?> -
                                     Quantity: <?php echo $part['quantity']; ?> -
                                     Cost: <?php echo number_format($part['total_cost'], 2); ?> USD
@@ -66,6 +66,5 @@
     </table>
 
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
+<script src="/data/js/pure.js"></script></body>
 </html>
