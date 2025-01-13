@@ -16,6 +16,22 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; /* Zapobiegaj przypadkowemu scrollowi poziomemu */
+}
+
+/* Zapewnij łamanie zbyt długich tytułów / tekstu w nagłówkach */
+h1, h2, h3, h4, h5 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Na małych ekranach zmniejsz rozmiar h1, jeśli chcesz */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.7rem;
+        line-height: 1.2;
+    }
 }
 
 /* Przykład .container - ograniczona szerokość i wycentrowanie */
@@ -82,7 +98,9 @@ body {
 
 /* ----------- PRZYCISKI .btn ----------- */
 .btn {
-    display: inline-block;
+    display: inline-flex;       /* aby zawartość była wycentrowana w pionie */
+    align-items: center;
+    justify-content: center;
     padding: 0.75rem 1.25rem;
     border: none;
     border-radius: 0.4rem;
@@ -96,7 +114,7 @@ body {
     color: #fff; /* domyślny kolor tekstu */
 }
 
-/* Warianty kolorystyczne zamiast bootstrapowych .btn-primary, .btn-success itd. */
+/* Warianty kolorystyczne przycisków */
 .btn-primary {
     background-color: #2980b9;
 }
@@ -128,31 +146,47 @@ body {
     background-color: #9e2f24;
 }
 .btn-sm {
-    padding: 0.3rem 0.6rem;
     font-size: 0.875rem;
+    padding: 0.3rem 0.6rem;
+    margin: auto 0;
+    min-height: 40px;
+    min-width: 50px;
 }
 .w-100 {
     width: 100%;
 }
 
 /* ----------- TABELKI .table ----------- */
+
+/* NOWE: klasa do responsywnego wrappera tabel */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Poziomy scroll, jeśli tabela jest szersza niż kontener */
+    -webkit-overflow-scrolling: touch; /* ładne przewijanie na iOS */
+}
+
 .table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1rem;
 }
+
 .table th,
 .table td {
     text-align: left;
     padding: 0.75rem;
     border: 1px solid #ddd;
+    vertical-align: middle; /* Wyśrodkuj w pionie */
 }
+
 .table thead th {
     background-color: #eee;
 }
+
 .table-bordered th, .table-bordered td {
     border: 1px solid #ddd;
 }
+
 .table-striped tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
@@ -163,6 +197,7 @@ body {
     border-radius: 0.5rem;
     margin-bottom: 1rem;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    word-wrap: break-word;  /* Łamanie długich tekstów w kartach */
 }
 .card-header {
     background-color: #e3e3e3;
@@ -172,13 +207,13 @@ body {
 .card-body {
     font-size: 1.1rem;
     padding: 2rem;
+    word-wrap: break-word;  /* Łamanie długich tekstów */
 }
 .card-body--scroll {
     max-height: 200px;
     overflow-y: auto;
     overflow-x: hidden;
 }
-
 .card.text-center {
     text-align: center;
 }
@@ -197,6 +232,18 @@ body {
 .bg-primary {
     background-color: #2980b9;
 }
+
+/*
+  Jeśli karty w Dashboard mają się automatycznie dopasowywać
+  do dostępnej szerokości na małym ekranie,
+  możesz użyć np.:
+
+  .card {
+      width: 100%;
+      max-width: 400px;
+      margin: 1rem auto;
+  }
+*/
 
 /* ----------- SIDEBAR ----------- */
 .sidebar {
@@ -233,7 +280,7 @@ body {
     margin-left: 250px; /* tyle, co szerokość sidebara */
     background-color: #f8f9fa;
     padding: 0.5rem 1rem;
-    position: sticky; /* byle się trzymała topu przy scrollu */
+    position: sticky; /* aby trzymała się topu przy scrollu */
     top: 0;
     z-index: 10;
 }
@@ -242,7 +289,6 @@ body {
 .profile-dropdown {
     position: relative;
 }
-
 /* Domyślnie dropdown niewidoczny */
 .dropdown-menu {
     display: none;
@@ -282,6 +328,10 @@ body {
 }
 
 /* ----------- FullCalendar eventy (opcjonalnie) ----------- */
+.fc {
+    width: 100% !important;   /* Wymuś szerokość w procentach */
+    overflow-x: auto;         /* Pozwól na przewijanie poziome przy wąskim ekranie */
+}
 .fc-event {
     background-color: #2980b9 !important;
     color: #fff !important;
@@ -306,7 +356,6 @@ form.needs-validation select:valid,
 form.needs-validation textarea:valid {
     border: 2px solid #27ae60;
 }
-
 .invalid-feedback {
     color: #c0392b;
     font-size: 0.9rem;
@@ -330,7 +379,7 @@ form.was-validated :invalid ~ .invalid-feedback {
     z-index: 9999;
 }
 
-/* ----------- DODATKOWE STYLOWANIE FORMULARZY (NOWE) ----------- */
+/* ----------- DODATKOWE STYLOWANIE FORMULARZY ----------- */
 /* 1) Podstawowy layout formularza */
 form {
     max-width: 600px;  /* aby formularz nie był zbyt szeroki */
@@ -365,12 +414,10 @@ textarea {
     font-size: 1rem;
     color: #333;
     background-color: #fff;
-    border: 1px solid #ccc; /* delikatniejsza ramka niż 2px */
+    border: 1px solid #ccc;
     border-radius: 4px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
-/* Focus na polu */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
@@ -381,11 +428,11 @@ input[type="datetime-local"]:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    border-color: #2980b9;  /* kolor akcentu */
+    border-color: #2980b9;
     box-shadow: 0 0 3px rgba(41,128,185,0.5);
 }
 
-/* 2) Subtelniejsza walidacja (nadpisanie) – jeśli wolisz */
+/* 2) Subtelniejsza walidacja (nadpisanie) – opcjonalnie */
 form.needs-validation input:invalid,
 form.needs-validation select:invalid,
 form.needs-validation textarea:invalid {
@@ -409,33 +456,80 @@ form.needs-validation textarea:valid {
     margin: 0; /* wyłącz domyślny margines .btn, bo mamy gap */
 }
 
-.container h1{
+/* .container h1 - wyśrodkowanie nagłówka (jeśli potrzeba) */
+.container h1 {
     text-align: center;
     margin-top: 20px;
 }
 
-.ml-4{
+.ml-4 {
     margin-left: 1.5rem;
 }
 
-
+/* Przykładowa klasa akcji w tabeli (.action-buttons) */
 .action-buttons {
     display: flex;
-    /*flex-wrap: wrap; !* Pozwala zawijać się wierszami na mniejszych ekranach *!*/
     align-items: center;
-    gap: 0.5rem;     /* Odstęp między przyciskami */
+    gap: 0.5rem;
 }
-
 .action-buttons form {
-    margin: 0;       /* Zabierz ewentualne marginesy domyślne */
-    display: flex;   /* lub inline-flex, by <button> wewnątrz był w linii */
+    margin: 0;
+    display: flex;
     align-items: center;
 }
 
+/* List group - drobny styling */
 .list-group-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 1rem;
     border-bottom: 1px solid #ddd;
+}
+
+/* ----------- MEDIA QUERIES DLA RESPONSYWNOŚCI NA TELEFONIE ----------- */
+@media (max-width: 768px) {
+
+    /* 1) Sidebar na małych ekranach -> przeniesiony na górę */
+    .sidebar {
+        position: static;
+        width: 100%;
+        min-height: auto;
+        margin-bottom: 1rem;
+        overflow-y: auto;
+    }
+    .sidebar .logo img {
+        max-height: 60px; /* mniejsze logo na mniejszych ekranach */
+    }
+
+    /* 2) Navbar i content nie mają marginesu z lewej */
+    .navbar {
+        margin-left: 0;
+    }
+    .content {
+        margin-left: 0;
+    }
+
+    /* 3) Kolumny w .row => 100% szerokości dla .col-md-3, .col-md-4 itp. */
+    .col-md-3,
+    .col-md-4,
+    .col-md-6 {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    /* 4) Zmniejsz font-size nagłówków jeszcze bardziej (opcjonalnie) */
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    /* Karty w 100% */
+    .card {
+        max-width: 100%;
+        margin: 0 0 1rem;
+    }
+
+    .calendar{
+        display: none;
+    }
 }

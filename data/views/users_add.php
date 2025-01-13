@@ -11,7 +11,7 @@
 <?php include __DIR__ . '/../partials/sidebar.php'; ?>
 <?php include __DIR__ . '/../partials/topnavbar.php'; ?>
 <!-- Main Content -->
-<div class="content" style="margin-left: 250px; padding: 20px;">
+<div class="content">
     <div class="container mt-4">
         <?php if (!empty($messages)): ?>
             <div class="alert alert-danger">

@@ -12,7 +12,7 @@
 <?php include __DIR__ . '/../partials/sidebar.php'; ?>
 <?php include __DIR__ . '/../partials/topnavbar.php'; ?>
 <!-- Main Content -->
-<div class="content" style="margin-left: 250px; padding: 20px;">
+<div class="content">
     <div class="container mt-4">
         <h1>Edit Item</h1>
         <form action="/inventory_edit?id=<?php echo $item->getId(); ?>" method="POST" class="needs-validation" novalidate>

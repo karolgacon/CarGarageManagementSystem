@@ -11,7 +11,7 @@
 <?php include __DIR__ . '/../partials/sidebar.php'; ?>
 <?php include __DIR__ . '/../partials/topnavbar.php'; ?>
 <!-- Main Content -->
-<div class="content" style="margin-left: 250px; padding: 20px;">
+<div class="content">
     <div class="container mt-4">
         <h1 class="mb-4">Edit user: <?php echo $user->getName()." ".$user->getSurname(); ?></h1>
         <form action="/users_edit?id=<?php echo $user->getId(); ?>" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>

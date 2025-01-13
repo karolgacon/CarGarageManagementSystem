@@ -12,7 +12,7 @@
 <?php include __DIR__ . '/../partials/sidebar.php'; ?>
 <?php include __DIR__ . '/../partials/topnavbar.php'; ?>
 <!-- Main Content -->
-<div class="content" style="margin-left: 250px; padding: 20px;">
+<div class="content">
     <div class="container">
         <h1>Dashboard - Witaj, <?php echo htmlspecialchars($user->getName() . ' ' . $user->getSurname()); ?>!</h1>
 
@@ -99,7 +99,7 @@
         </div>
 
         <!-- Kalendarz -->
-        <div class="row mt-4">
+        <div class="row mt-4 calendar">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Kalendarz wydarzeń</div>

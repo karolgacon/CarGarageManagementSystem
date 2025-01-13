@@ -11,13 +11,14 @@
 <?php include __DIR__ . '/../partials/sidebar.php'; ?>
 <?php include __DIR__ . '/../partials/topnavbar.php'; ?>
 <!-- Main Content -->
-<div class="content" style="margin-left: 250px; padding: 20px;">
+<div class="content">
     <div class="container mt-4">
         <h1 class="mb-4 text-center">Users</h1>
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="/users_add" class="btn btn-primary">Add New User</a>
             <input type="text" id="searchUser" class="form-control w-50" placeholder="Search users...">
         </div>
+        <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -45,6 +46,7 @@
             <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
     </div>
 </div>
 

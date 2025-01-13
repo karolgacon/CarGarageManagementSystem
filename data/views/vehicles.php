@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vehicles</title>
     <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">-->
-    <link rel="stylesheet" href="/data/css/pure.css">>
+    <link rel="stylesheet" href="/data/css/pure.css">
 </head>
 <body>
 <?php include __DIR__ . '/../partials/sidebar.php'; ?>
 <?php include __DIR__ . '/../partials/topnavbar.php'; ?>
 <div class="content">
+    <div class="container mt-4">
     <h1 class="mb-4 text-center">Vehicles</h1>
     <a href="/vehicle_add" class="btn btn-primary mb-3">Add New Vehicle</a>
     <div class="mb-3">
         <input type="text" id="vehicleSearch" class="form-control" placeholder="Search vehicles...">
     </div>
-
+        <div class="table-responsive">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -50,6 +51,13 @@
     </table>
 
 </div>
+</div>
+</div>
+<footer class="footer mt-auto py-3 bg-dark text-light text-center">
+    <div class="container">
+        <span>© 2025 Garage Master. All Rights Reserved.</span>
+    </div>
+</footer>
 <script src="/data/js/pure.js"></script>
 <script src="/data/js/vehicle.js"></script>
 </body>

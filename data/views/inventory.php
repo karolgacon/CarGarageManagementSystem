@@ -12,10 +12,11 @@
 <?php include __DIR__ . '/../partials/sidebar.php'; ?>
 <?php include __DIR__ . '/../partials/topnavbar.php'; ?>
 <!-- Main Content -->
-<div class="content" style="margin-left: 250px; padding: 20px;">
+<div class="content" >
     <div class="container mt-4">
         <h1>Inventory</h1>
         <a href="/inventory_add" class="btn btn-primary mb-3">Add New Item</a>
+        <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -45,6 +46,7 @@
             <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
     </div>
 </div>
 
