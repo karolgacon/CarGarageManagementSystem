@@ -103,3 +103,6 @@ html, body {
     display: none;           /* Ukryj kropkę przy wydarzeniach */
 }
 
+.inline{
+    display: inline;
+}

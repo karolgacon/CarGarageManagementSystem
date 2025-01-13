@@ -106,7 +106,7 @@ class InvoiceController extends AppController {
     }
 
     public function exportToPDF(): void {
-        $id = isset($_GET['?id']) ? (int)$_GET['?id'] : null;
+        $id = isset($_POST['id']) ? (int)$_POST['id'] : null;
 
         if ($id === null) {
             $_SESSION['error'] = 'Invoice ID is required.';
