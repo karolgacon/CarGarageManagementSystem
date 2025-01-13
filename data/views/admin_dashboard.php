@@ -57,12 +57,12 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">Twoje zlecenia</div>
-                    <div class="card-body">
+                    <div class="card-body--scroll card-body">
                         <?php if (!empty($services)): ?>
                             <ul class="list-group">
                                 <?php foreach ($services as $service): ?>
                                     <li class="list-group-item">
-                                        <strong><?php echo $service['description']; ?></strong> -
+                                        <strong><?php echo $service['description']; ?></strong>
                                         Data: <?php echo date('Y-m-d', strtotime($service['date'])); ?>,
                                         Status: <?php echo ucfirst($service['status']); ?>
                                     </li>
@@ -79,12 +79,12 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">Twoje faktury</div>
-                    <div class="card-body">
+                    <div class="card-body--scroll card-body">
                         <?php if (!empty($invoices)): ?>
                             <ul class="list-group">
                                 <?php foreach ($invoices as $invoice): ?>
                                     <li class="list-group-item">
-                                        Faktura: <?php echo $invoice['invoice_number']; ?> -
+                                        <strong>Faktura: <?php echo $invoice['invoice_number']; ?> </strong>
                                         Kwota: <?php echo number_format($invoice['amount'], 2); ?> USD,
                                         Status: <?php echo ucfirst($invoice['status']); ?>
                                     </li>

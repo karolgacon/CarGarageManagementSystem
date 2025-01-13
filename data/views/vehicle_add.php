@@ -57,8 +57,8 @@
             <label for="vin" class="form-label">VIN</label>
             <input type="text" name="vin" id="vin" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-success">Add Vehicle</button>
-        <a href="/vehicles" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary w-100">Add Vehicle</button>
+        <a href="/vehicles" class="btn btn-secondary w-100">Cancel</a>
     </form>
 </div>
 <script src="/data/js/pure.js"></script>

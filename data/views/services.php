@@ -12,7 +12,7 @@
 <?php include __DIR__ . '/../partials/topnavbar.php'; ?>
 <div class="content">
     <h1 class="mb-4 text-center">Services</h1>
-    <a href="/service_add" class="btn btn-success mb-3">Add Service</a>
+    <a href="/service_add" class="btn btn-primary mb-3">Add Service</a>
     <table class="table table-bordered">
         <thead>
         <tr>

@@ -57,8 +57,8 @@
             <input type="text" name="vin" id="vin" class="form-control"
                    value="<?php echo htmlspecialchars($vehicle->getVin()); ?>" required>
         </div>
-        <button type="submit" class="btn btn-success">Save Changes</button>
-        <a href="/vehicles" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+        <a href="/vehicles" class="btn btn-secondary w-100">Cancel</a>
     </form>
 </div>
 <script src="/data/js/pure.js"></script>

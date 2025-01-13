@@ -57,7 +57,7 @@
                             <ul class="list-group">
                                 <?php foreach ($services as $service): ?>
                                     <li class="list-group-item">
-                                        <strong><?php echo $service['description']; ?></strong> -
+                                        <strong><?php echo $service['description']; ?></strong>
                                         Data: <?php echo date('Y-m-d', strtotime($service['date'])); ?>,
                                         Status: <?php echo ucfirst($service['status']); ?>
                                     </li>
@@ -79,7 +79,7 @@
                             <ul class="list-group">
                                 <?php foreach ($invoices as $invoice): ?>
                                     <li class="list-group-item">
-                                        Faktura: <?php echo $invoice['invoice_number']; ?> -
+                                       <strong>Faktura: <?php echo $invoice['invoice_number']; ?> </strong>
                                         Kwota: <?php echo number_format($invoice['amount'], 2); ?> USD,
                                         Status: <?php echo ucfirst($invoice['status']); ?>
                                     </li>
