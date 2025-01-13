@@ -40,17 +40,21 @@ function initializeCalendar() {
         },
         eventDidMount: function (info) {
             // Tworzenie popupa Bootstrap
-            new bootstrap.Popover(info.el, {
-                title: info.event.title,
-                content: `
-                    <p><strong>Data:</strong> ${info.event.start.toLocaleDateString()}</p>
-                    <p><strong>Godzina:</strong> ${info.event.start.toLocaleTimeString()}</p>
-                    <p><strong>Opis:</strong> ${info.event.extendedProps.description || 'Brak szczegółów'}</p>
-                `,
-                html: true,
-                trigger: 'hover',
-                placement: 'top'
-            });
+            // new bootstrap.Popover(info.el, {
+            //     title: info.event.title,
+            //     content: `
+            //         <p><strong>Data:</strong> ${info.event.start.toLocaleDateString()}</p>
+            //         <p><strong>Godzina:</strong> ${info.event.start.toLocaleTimeString()}</p>
+            //         <p><strong>Opis:</strong> ${info.event.extendedProps.description || 'Brak szczegółów'}</p>
+            //     `,
+            //     html: true,
+            //     trigger: 'hover',
+            //     placement: 'top'
+            // });
+            info.el.setAttribute('title', `${info.event.title}
+            Data: ${info.event.start.toLocaleDateString()}
+            Godzina: ${info.event.start.toLocaleTimeString()}
+            Opis: ${info.event.extendedProps.description || 'Brak szczegółów'}`);
         }
     });
 

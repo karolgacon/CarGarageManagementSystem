@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Garage Management System</title>
     <link rel="stylesheet" href="data/css/login.css">
+    <link rel="stylesheet" href="data/css/pure.css">
 </head>
 <body>
     <div class="mainContainer">

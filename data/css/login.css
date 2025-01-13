@@ -1,3 +1,4 @@
+/* ========== RESET PODSTAWOWY ========== */
 * {
   margin: 0;
   padding: 0;
@@ -6,188 +7,148 @@
 
 html {
   font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
 }
 
+/* ========== TŁO EKRANU LOGOWANIA ========== */
 body {
-  font-family: Montserrat, sans-serif;
-  background: linear-gradient(
-    114deg,
-    rgba(255, 106, 7, 1) 0%,
-    rgba(195, 79, 1, 1) 100%
-  );
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  /* Ten sam gradient, co w innych widokach */
+  background: linear-gradient(
+          114deg,
+          rgba(255, 106, 7, 1) 0%,
+          rgba(195, 79, 1, 1) 100%
+  );
 }
 
+/* ========== GŁÓWNY KONTENER ========== */
 .mainContainer {
-  max-width: 1440px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 80vh;
-  width: 70vw;
+
+  width: 90%;
+  max-width: 1200px;
   background-color: #f5f5f5;
-  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
   border-radius: 15px;
-  padding: 15px 30px;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Możesz zachować left i right, jeśli masz grafikę po lewej itp. */
+.mainContainer__left {
+  display: none; /* Ukryte na mniejszych ekranach. Możesz przywrócić w media query. */
+  width: 50%;
+  background: url('../img/41941364_8959247.jpg') center/cover no-repeat;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 
 .mainContainer__right {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: flex-start;
-  height: 100%;
-  width: 80%;
+  width: 100%;
+  max-width: 600px; /* ogranicz szerokość formularza */
+  padding: 1rem;
 }
 
+/* ========== TYTUŁ NA GÓRZE ========== */
 .mainContainer__right--header {
-  margin-top: -80px;
-  height: 10%;
-  padding: 10px;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
+/* ========== FORMULARZ (login) ========== */
 .mainContainer__right--login {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
-  height: 50%;
-  width: 100%;
-  margin-top: -50px;
 }
 
-.mainContainer__right--input {
+/* Podpisy pól */
+.mainContainer__right--text {
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
   font-size: 1.1rem;
-  width: 100%;
-  height: 20%;
-  padding: 10px;
-  border-radius: 15px;
-  margin: 10px 0;
-  border-color: #b3acac;
-  border-width: 3px;
+  font-weight: 600;
 }
 
+/* Pola tekstowe */
+.mainContainer__right--input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
 .mainContainer__right--input:focus {
   outline: none;
-  border: #67a726 3px solid;
+  border-color: #67a726;
 }
 
+/* Przycisk Logowania */
 .mainContainer__right--button {
   width: 100%;
-  height: 20%;
-  padding: 11px;
-  border-radius: 15px;
+  padding: 0.8rem;
+  border: 2px solid #67a726;
+  border-radius: 10px;
   background-color: #67a726;
-  color: white;
+  color: #fff;
   font-size: 1.1rem;
   font-weight: 700;
+  margin-top: 1.2rem;
   cursor: pointer;
-  border: #67a726 3px solid;
-  margin: 10px 0;
+  transition: background-color 0.3s, border-color 0.3s;
 }
-
-.mainContainer__right--text {
-  margin-top: 15px;
-}
-
 .mainContainer__right--button:hover {
   background-color: #55901b;
   border-color: #55901b;
 }
 
+/* Tekst na dole (np. link do rejestracji) */
 .mainContainer__right--footer {
-  margin-top: 20px;
+  margin-top: 1.5rem;
   font-size: 1rem;
 }
+.mainContainer__right--footer a {
+  text-decoration: underline;
+  color: #333;
+}
 
-@media screen and (min-width: 768px) {
+/* ========== MEDIA QUERIES ========== */
+@media (min-width: 768px) {
   .mainContainer {
-    height: 70vh;
+    flex-direction: row;
   }
-
-  .mainContainer__right--text {
-    font-size: 1.2rem;
+  .mainContainer__left {
+    display: block;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
   }
-
-  .mainContainer__right--footer {
-    margin-top: 10px;
-    font-size: 1.2rem;
+  .mainContainer__right {
+    width: 50%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-left: -1px; /* aby nie było szczeliny */
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .mainContainer {
-    flex-direction: row;
-    background: none;
-    height: 85vh;
-    width: 90%;
+@media (min-width: 1024px) {
+  .mainContainer__right--header {
+    font-size: 2.5rem;
   }
-
-  .mainContainer__left--title {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-image: url("../img/41941364_8959247.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border-top-left-radius: 40px;
-    border-bottom-left-radius: 40px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    z-index: 1;
-    padding: 10px 30px;
-  }
-
-  .mainContainer__left {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 75%;
-    height: 100%;
-  }
-
-  .mainContainer__right {
-    flex-direction: column;
-    justify-content: space-around;
-    height: 100%;
-    width: 75%;
-    background-color: #f5f5f5;
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
-    padding: 10px 35px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  }
-
-  .mainContainer__right--footer {
-    margin-top: 20px;
+  .mainContainer__right--text {
     font-size: 1.2rem;
   }
-
   .mainContainer__right--button {
-    margin-top: 30px;
-    font-size: 1.3rem;
-  }
-
-  .mainContainer__right--header {
-    margin-top: -30px;
-    font-size: 3rem;
-  }
-
-  .mainContainer__right--login {
-    margin-top: -130px;
-  }
-
-  .mainContainer__right--text {
-    font-size: 1.3rem;
-  }
-  .mainContainer__right--input {
-    height: 100%;
+    font-size: 1.2rem;
   }
 }

@@ -10,7 +10,7 @@
             <a href="inventory">Inventory</a>
         <?php endif; ?>
         <?php if ($_SESSION['user_role'] === 'admin'): ?>
-            <a href="users" class="active">Users</a>
+            <a href="users">Users</a>
         <?php endif; ?>
         <a href="vehicles">Vehicles</a>
         <a href="services">Services</a>

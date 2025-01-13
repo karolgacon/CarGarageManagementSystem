@@ -1,0 +1,360 @@
+/* RESET STYLÓW (opcjonalnie możesz użyć tzw. mini resetu) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Ustawienia bazowe */
+html {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif; /* ta sama czcionka co w login.css */
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Przykład .container - ograniczona szerokość i wycentrowanie */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Rzędy i kolumny – uproszczony „grid” wzorowany na Bootstrapie */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -0.5rem;
+}
+.col-md-3,
+.col-md-4,
+.col-md-6,
+.col-md-12 {
+    padding: 0.5rem;
+}
+
+/* Dla szerokości >= 768px (tablet i wyżej) */
+@media (min-width: 768px) {
+    .col-md-3 {
+        width: 25%;
+    }
+    .col-md-4 {
+        width: 33.33%;
+    }
+    .col-md-6 {
+        width: 50%;
+    }
+    .col-md-12 {
+        width: 100%;
+    }
+}
+
+/* Tekst wyrównany do środka */
+.text-center {
+    text-align: center;
+}
+
+/* Margines od góry */
+.mt-4 {
+    margin-top: 2rem;
+}
+.mt-5 {
+    margin-top: 3rem;
+}
+.mb-3 {
+    margin-bottom: 1rem;
+}
+.mb-4 {
+    margin-bottom: 2rem;
+}
+.g-4 > * {
+    margin-bottom: 1.5rem; /* odległości między kafelkami itp. */
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin: 0.3rem;
+    color: #fff; /* domyślny kolor tekstu */
+}
+
+/* Warianty kolorystyczne zamiast bootstrapowych .btn-primary, .btn-success itd. */
+.btn-primary {
+    background-color: #2980b9;
+}
+.btn-primary:hover {
+    background-color: #1f6691;
+}
+.btn-secondary {
+    background-color: #7f8c8d;
+}
+.btn-secondary:hover {
+    background-color: #6c7a7a;
+}
+.btn-success {
+    background-color: #27ae60;
+}
+.btn-success:hover {
+    background-color: #1e8d4d;
+}
+.btn-warning {
+    background-color: #f39c12;
+}
+.btn-warning:hover {
+    background-color: #c87f0e;
+}
+.btn-danger {
+    background-color: #c0392b;
+}
+.btn-danger:hover {
+    background-color: #9e2f24;
+}
+.btn-sm {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.875rem;
+}
+.w-100 {
+    width: 100%;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.table th,
+.table td {
+    text-align: left;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+}
+
+.table thead th {
+    background-color: #eee;
+}
+
+/* Możesz użyć .table-bordered, .table-striped itp. */
+.table-bordered th, .table-bordered td {
+    border: 1px solid #ddd;
+}
+
+.table-striped tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+.card-header {
+    background-color: #e3e3e3;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+}
+.card-body {
+    padding: 1rem;
+}
+.card.text-center {
+    text-align: center;
+}
+.text-white {
+    color: #fff;
+}
+.bg-success {
+    background-color: #27ae60;
+}
+.bg-warning {
+    background-color: #f39c12;
+}
+.bg-danger {
+    background-color: #c0392b;
+}
+.bg-primary {
+    background-color: #2980b9;
+}
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh; /* aby side-bar rozciągał się na pełną wysokość */
+    position: fixed;  /* przyklejony do lewej */
+    background-color: #343a40;
+    color: #fff;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+}
+.sidebar .logo {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.sidebar .menu a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    margin: 0.2rem 0;
+}
+.sidebar .menu a:hover {
+    background-color: #495057;
+}
+.sidebar a.active {
+    background-color: #495057;
+}
+
+/* Główna nawigacja – uproszczona */
+.navbar {
+    margin-left: 250px; /* tyle, co szerokość sidebara */
+    background-color: #f8f9fa;
+    padding: 0.5rem 1rem;
+    position: sticky; /* byle się trzymała topu przy scrollu */
+    top: 0;
+    z-index: 10;
+}
+
+/* Prawy dropdown (profil) – musimy sami napisać prostą obsługę w JS, jeśli chcemy */
+.profile-dropdown {
+    position: relative;
+}
+.dropdown-menu {
+    display: none; /* domyślnie ukryta */
+    position: absolute;
+    top: 2.5rem;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    min-width: 150px;
+    padding: 0.5rem 0;
+}
+.dropdown-menu.show {
+    display: block;
+}
+.dropdown-menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+}
+.dropdown-menu a:hover {
+    background-color: #eee;
+}
+
+.content {
+    margin-left: 250px; /* tyle co sidebar */
+    padding: 20px;
+    flex: 1; /* wypełnij przestrzeń w pionie (jeśli body = flex) */
+}
+
+.footer {
+    background-color: #212529;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* przyklej stopkę na dole */
+}
+
+/* Własne kolory eventów */
+.fc-event {
+    background-color: #2980b9 !important; /* nadpisanie inline styles (jeśli potrzeba) */
+    color: #fff !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 5px !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease;
+}
+.fc-event:hover {
+    background-color: #1f6691 !important;
+}
+
+form.needs-validation input:invalid,
+form.needs-validation select:invalid,
+form.needs-validation textarea:invalid {
+    border: 2px solid #c0392b;
+}
+form.needs-validation input:valid,
+form.needs-validation select:valid,
+form.needs-validation textarea:valid {
+    border: 2px solid #27ae60;
+}
+
+.invalid-feedback {
+    color: #c0392b;
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    display: none;
+}
+
+/* Gdy formularz ma .was-validated i element jest :invalid => pokaż feedback */
+form.was-validated :invalid ~ .invalid-feedback {
+    display: block;
+}
+
+.my-tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    pointer-events: none;
+    font-size: 0.8rem;
+    z-index: 9999;
+}
+
+
+/* Przykładowe style dla dropdown – możesz umieścić w 'mainview.css' czy 'pure.css' */
+
+.nav-item.dropdown {
+    position: relative; /* by móc pozycjonować .dropdown-menu */
+}
+
+/* Domyślnie dropdown niewidoczny */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    min-width: 150px;
+    margin-top: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    list-style: none;
+    padding: 0.5rem 0;
+    z-index: 10; /* by menu nie chowało się za inne elementy */
+}
+
+/* Po nadaniu .show – widać menu */
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Styl linków w menu */
+.dropdown-item {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown-item:hover {
+    background-color: #f2f2f2;
+}
