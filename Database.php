@@ -8,6 +8,7 @@ class Database {
     private $database;
     private $password;
     private $host;
+    private $port;
 
 
     public function __construct () {
@@ -15,12 +16,13 @@ class Database {
         $this -> database = DATABASE;
         $this -> password = PASSWORD;
         $this -> host = HOST;
+        $this -> port = PORT;
     }
 
     public function connect() {
         try {
             $conn = new PDO(
-                "pgsql:host=$this->host;port=5432;dbname=$this->database",
+                "pgsql:host=$this->host;port=$this->port;dbname=$this->database",
                 $this->username,
                 $this->password,
                 ["sslmode"  => "prefer"]

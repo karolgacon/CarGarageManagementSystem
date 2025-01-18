@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - System Zarządzania Warsztatem</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css"><!-- FullCalendar CSS -->
     <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="/data/css/pure.css">
 </head>
@@ -89,8 +90,9 @@
             </div>
         </div>
 
+
         <!-- Kalendarz -->
-        <div class="row mt-4">
+        <div class="row mt-4 calendar">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Kalendarz wydarzeń</div>

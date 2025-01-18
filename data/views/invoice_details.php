@@ -11,6 +11,7 @@
 <?php include __DIR__ . '/../partials/sidebar.php'; ?>
 <?php include __DIR__ . '/../partials/topnavbar.php'; ?>
 <div class="container mt-5">
+    <div class="content">
     <h1 class="mb-4">Invoice Details</h1>
 
     <!-- Informacje o fakturze -->
@@ -100,6 +101,7 @@
     <div class="mt-4">
         <a href="/invoices" class="btn btn-secondary">Back to Invoices</a>
         <a href="/invoice_export?id=<?php echo $invoice['id']; ?>" target="_blank" class="btn btn-primary">Export PDF</a>
+    </div>
     </div>
 </div>
 
