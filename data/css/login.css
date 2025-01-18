@@ -30,20 +30,20 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-
+  height: 80%;
   width: 90%;
   max-width: 1200px;
   background-color: #f5f5f5;
   border-radius: 15px;
-  padding: 2rem;
+  /*padding: 2rem;*/
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Możesz zachować left i right, jeśli masz grafikę po lewej itp. */
 .mainContainer__left {
   display: none; /* Ukryte na mniejszych ekranach. Możesz przywrócić w media query. */
-  width: 50%;
-  background: url('../img/41941364_8959247.jpg') center/cover no-repeat;
+  background-image: url('../img/41941364_8959247.jpg');
+  background-size: cover;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
 }
@@ -54,7 +54,7 @@ body {
   justify-content: space-evenly;
   width: 100%;
   max-width: 600px; /* ogranicz szerokość formularza */
-  padding: 1rem;
+  padding: 1rem 2rem;
 }
 
 /* ========== TYTUŁ NA GÓRZE ========== */
@@ -68,6 +68,7 @@ body {
 .mainContainer__right--login {
   display: flex;
   flex-direction: column;
+  margin-right: 30px;
 }
 
 /* Podpisy pól */
@@ -128,6 +129,10 @@ body {
   }
   .mainContainer__left {
     display: block;
+    height: 100%;
+    width: 50%;
+    min-height: 80vh;
+    margin-right: 30px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-top-left-radius: 15px;
