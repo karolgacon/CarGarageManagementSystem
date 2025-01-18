@@ -47,13 +47,32 @@ h1, h2, h3, h4, h5 {
     display: flex;
     flex-wrap: wrap;
     margin: -0.5rem;
+    /*align-items: center;*/
+    gap: 0.2rem; /* Dodanie odstępów między elementami */
 }
+
+.col-md-1,
+.col-md-2,
 .col-md-3,
 .col-md-4,
+.col-md-5,
 .col-md-6,
 .col-md-12 {
     padding: 0.5rem;
 }
+
+.col-md-5 {
+    flex: 3; /* Proporcje szerokości kolumn */
+}
+
+.col-md-2{
+    flex: 2;
+}
+
+.col-md-1{
+    flex: 1;
+}
+
 
 /* Dla szerokości >= 768px (tablet i wyżej) */
 @media (min-width: 768px) {
@@ -532,4 +551,24 @@ form.needs-validation textarea:valid {
     .calendar{
         display: none;
     }
+}
+
+.remove-part {
+    margin-left: 0.2rem; /* Odstęp od sąsiednich elementów */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 0;
+    border: none;
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.remove-part:hover {
+    background-color: #c82333;
 }

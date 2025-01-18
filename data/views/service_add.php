@@ -41,7 +41,7 @@
         <div id="parts-container" class="mb-3">
             <label class="form-label">Parts Used</label>
             <div class="row mb-2">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <select name="parts[0][part_id]" class="form-select part-select" data-index="0" required>
                         <option value="">Select Part</option>
                         <?php foreach ($inventory as $part): ?>
@@ -51,11 +51,14 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <input type="number" name="parts[0][quantity]" class="form-control quantity-input" data-index="0" placeholder="Quantity" required>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <input type="text" class="form-control total-cost-display" data-index="0" placeholder="Total Cost" readonly>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="remove-part btn btn-sm btn-danger" data-index="0">X</button>
                 </div>
             </div>
         </div>
