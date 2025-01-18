@@ -199,5 +199,15 @@ class ServiceRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
+    public function findByVehicleId(int $vehicleId): array
+    {
+        $stmt = $this->database->connect()->prepare("
+        SELECT * 
+        FROM services
+        WHERE vehicle_id = :vehicle_id"
+        );
+        $stmt->bindParam(':vehicle_id', $vehicleId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

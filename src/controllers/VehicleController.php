@@ -4,6 +4,7 @@ require_once __DIR__.'/../repository/VehicleRepository.php';
 require_once __DIR__ . '/../repository/UserRepository.php';
 
 class VehicleController extends AppController {
+    private ServiceRepository $serviceRepository;
     private VehicleRepository $vehicleRepository;
     private UserRepository $userRepository;
 
@@ -11,6 +12,7 @@ class VehicleController extends AppController {
         parent::__construct();
         $this->vehicleRepository = new VehicleRepository();
         $this->userRepository = new UserRepository();
+        $this->serviceRepository = new ServiceRepository();
     }
 
     public function index(): void {
@@ -18,7 +20,17 @@ class VehicleController extends AppController {
         $sort = $_GET['sort'] ?? 'make_asc';
 
         $vehicles = $this->vehicleRepository->getVehicles($search, $sort);
-        $this->render('vehicles', ['vehicles' => $vehicles]);
+        $owners=[];
+        foreach ($vehicles as $v){
+            $ownerID = $v->getOwnerId();
+            $owner = $this->userRepository->getUserById($ownerID);
+
+            $owners[$ownerID]=[
+              'name' => $owner->getName(),
+                'surname' => $owner->getSurname()
+            ];
+        }
+        $this->render('vehicles', ['vehicles' => $vehicles, 'owners' => $owners]);
     }
 
     public function add(): void {
@@ -80,4 +92,30 @@ class VehicleController extends AppController {
         $this->vehicleRepository->deleteVehicle($id);
         header('Location: /vehicles');
     }
+
+    public function history(): void
+    {
+        // 1) Pobranie ID z GET
+        $vehicleId = $_GET['?id'] ?? null;
+        if (!$vehicleId) {
+            // Możesz zrobić redirect, rzucić wyjątek itp.
+            die('Missing vehicle ID!');
+        }
+
+        // 2) Pobranie pojazdu z bazy
+        $vehicle = $this->vehicleRepository->getVehicleById($vehicleId);
+        if (!$vehicle) {
+            die('Vehicle not found!');
+        }
+
+        // 3) Pobranie usług (historii serwisów) dla tego pojazdu
+        $services = $this->serviceRepository->findByVehicleId($vehicleId);
+
+        // 4) Przekazanie danych do widoku
+        $this->render('vehicle_history', [
+            'vehicle' => $vehicle,
+            'services' => $services
+        ]);
+    }
+
 }

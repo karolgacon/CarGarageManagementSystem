@@ -5,6 +5,7 @@ class Service {
     private int $id;
     private int $vehicleId;
     private string $description;
+
     private string $status;
     private string $date;
     private float $cost;
@@ -15,6 +16,37 @@ class Service {
         $this->description = $description;
         $this->status = $status;
         $this->date = $date;
+        $this->cost = $cost;
+    }
+
+
+    public function setVehicleId(int $vehicleId): void
+    {
+        $this->vehicleId = $vehicleId;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
+    }
+
+    public function setDate(string $date): void
+    {
+        $this->date = $date;
+    }
+
+    public function setCost(float $cost): void
+    {
         $this->cost = $cost;
     }
 

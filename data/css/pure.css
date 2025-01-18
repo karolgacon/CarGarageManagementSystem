@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5 {
     flex-wrap: wrap;
     margin: -0.5rem;
     /*align-items: center;*/
-    gap: 0.2rem; /* Dodanie odstępów między elementami */
+    /*gap: 0.2rem; !* Dodanie odstępów między elementami *!*/
 }
 
 .col-md-1,
@@ -107,6 +107,10 @@ h1, h2, h3, h4, h5 {
 }
 .mb-4 {
     margin-bottom: 2rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.8rem;
 }
 
 /* Odstępy między kafelkami itp. */

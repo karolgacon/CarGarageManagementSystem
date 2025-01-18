@@ -43,6 +43,8 @@ Router::post('vehicle_add', 'VehicleController@add');
 Router::get('vehicle_edit', 'VehicleController@edit');
 Router::post('vehicle_edit', 'VehicleController@edit');
 Router::get('vehicle_delete', 'VehicleController@delete');
+Router::get('vehicle_history', 'VehicleController@history');
+
 
 //Service management
 Router::get('services', 'ServiceController@index');

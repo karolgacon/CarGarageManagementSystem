@@ -35,7 +35,16 @@
         <?php foreach ($vehicles as $vehicle): ?>
             <tr>
                 <td><?php echo htmlspecialchars($vehicle->getId()); ?></td>
-                <td><?php echo htmlspecialchars($vehicle->getOwnerId()); ?></td>
+                <td>
+                    <?php
+                    $ownerId = $vehicle->getOwnerId();
+                    if (isset($owners[$ownerId])) {
+                        echo htmlspecialchars($owners[$ownerId]['name'] . ' ' . $owners[$ownerId]['surname']);
+                    } else {
+                        echo 'Unknown';
+                    }
+                    ?>
+                </td>
                 <td><?php echo htmlspecialchars($vehicle->getMake()); ?></td>
                 <td><?php echo htmlspecialchars($vehicle->getModel()); ?></td>
                 <td><?php echo htmlspecialchars($vehicle->getYear()); ?></td>
@@ -43,6 +52,7 @@
                 <td><?php echo htmlspecialchars($vehicle->getEngineCapacity()) . ' cc'; ?></td>
                 <td>
                     <a href="/vehicle_edit?id=<?php echo $vehicle->getId(); ?>" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/vehicle_history?id=<?php echo $vehicle->getId(); ?>" class="btn btn-secondary btn-sm">History</a>
                     <a href="/vehicle_delete?id=<?php echo $vehicle->getId(); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
             </tr>
