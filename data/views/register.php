@@ -38,7 +38,16 @@
                     foreach ($messages as $message) {
                         echo "<p class='message'>$message</p>";
                     }
-                } ?>
+                }
+                if (isset($redirect) && $redirect === true) {
+                    echo "<script>
+        setTimeout(function() {
+            window.location.href = '/login';
+        }, 5000); 
+    </script>";
+                }
+                ?>
+
 
                 <span class="mainContainer__right--footer">Already have an account? <a href="login">Login</a></span>
             </div>

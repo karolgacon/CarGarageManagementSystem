@@ -124,8 +124,11 @@ class SecurityController extends AppController {
         $userRepository->addUser($newUser);
 
         // Przekierowanie na stronę logowania
-        header('Location: /login');
-        exit();
+//        header('Location: /login');
+        return $this->render('register', [
+            'messages' => ['Registration successful! You will be redirected to the login page in 5 seconds.'],
+            'redirect' => true // Dodatkowy parametr do obsługi przekierowania
+        ]);
     }
 
 

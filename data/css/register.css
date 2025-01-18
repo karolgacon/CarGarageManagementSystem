@@ -23,6 +23,28 @@ body {
   );
 }
 
+.message {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #4caf50;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
 /* ========== GŁÓWNY KONTENER ========== */
 .mainContainer {
   display: flex;
