@@ -136,4 +136,3 @@ class VehicleRepository extends Repository {
 
 
 }
-
