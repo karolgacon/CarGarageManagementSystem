@@ -100,7 +100,10 @@
     <!-- Akcje -->
     <div class="mt-4">
         <a href="/invoices" class="btn btn-secondary">Back to Invoices</a>
-        <a href="/invoice_export?id=<?php echo $invoice['id']; ?>" target="_blank" class="btn btn-primary">Export PDF</a>
+        <form action="/invoice_export" method="POST" target="_blank" class="inline">
+            <input type="hidden" name="id" value="<?php echo $invoice['id']; ?>">
+            <button type="submit" class="btn btn-primary btn-sm">Export PDF</button>
+        </form>
     </div>
     </div>
 </div>
