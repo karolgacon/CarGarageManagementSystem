@@ -17,7 +17,7 @@
     <!-- Informacje o fakturze -->
     <div class="card mb-4">
         <div class="card-body">
-            <h5 class="card-title">Invoice Information</h5>
+            <h3 class="card-title">Invoice Information</h3>
             <p><strong>Invoice Number:</strong> <?php echo $invoice['invoice_number']; ?></p>
             <p><strong>Issued Date:</strong> <?php echo date('Y-m-d H:i', strtotime($invoice['created_at'])); ?></p>
             <p><strong>Status:</strong>
@@ -33,7 +33,7 @@
     <!-- Informacje o kliencie -->
     <div class="card mb-4">
         <div class="card-body">
-            <h5 class="card-title">Client Information</h5>
+            <h3 class="card-title">Client Information</h3>
             <p><strong>Name:</strong> <?php echo $client['name'] . ' ' . $client['surname']; ?></p>
             <p><strong>Email:</strong> <?php echo $client['email']; ?></p>
         </div>
@@ -42,7 +42,7 @@
     <!-- Informacje o usłudze -->
     <div class="card mb-4">
         <div class="card-body">
-            <h5 class="card-title">Service Details</h5>
+            <h3 class="card-title">Service Details</h3>
             <p><strong>Description:</strong> <?php echo $service['description']; ?></p>
             <p><strong>Date:</strong> <?php echo date('Y-m-d H:i', strtotime($service['date'])); ?></p>
             <p><strong>Service Cost:</strong> <?php echo number_format($service['cost'], 2); ?> USD</p>
@@ -52,7 +52,7 @@
     <!-- Informacje o częściach -->
     <div class="card mb-4">
         <div class="card-body">
-            <h5 class="card-title">Parts Used</h5>
+            <h3 class="card-title">Parts Used</h3>
             <table class="table">
                 <thead>
                 <tr>
@@ -84,7 +84,7 @@
     <!-- Podsumowanie -->
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Summary</h5>
+            <h3 class="card-title">Summary</h3>
             <p><strong>Service Cost (Net):</strong> <?php echo number_format($service['cost'], 2); ?> USD</p>
             <p><strong>Parts Total (Net):</strong> <?php echo number_format($partsTotal, 2); ?> USD</p>
             <p><strong>Total Amount (Net):</strong> <?php echo number_format($invoice['amount'], 2); ?> USD</p>
@@ -102,7 +102,7 @@
         <a href="/invoices" class="btn btn-secondary">Back to Invoices</a>
         <form action="/invoice_export" method="POST" target="_blank" class="inline">
             <input type="hidden" name="id" value="<?php echo $invoice['id']; ?>">
-            <button type="submit" class="btn btn-primary btn-sm">Export PDF</button>
+            <button type="submit" class="btn btn-primary">Export PDF</button>
         </form>
     </div>
     </div>

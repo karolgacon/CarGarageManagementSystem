@@ -16,18 +16,32 @@ class InvoiceController extends AppController {
 
     // Wyświetlenie listy faktur
     public function index(): void {
+
+        $currentUserId = $_SESSION['user_id'] ?? null;
+        $currentUserRole = $_SESSION['user_role'] ?? 'user'; // Domyślnie użytkownik
+
         $sort = $_GET['?sort'] ?? 'created_at_desc'; // Domyślne sortowanie
-        $invoices = $this->invoiceRepository->getAllInvoices($sort);
+        if ($currentUserRole === 'admin') {
+            // Admin widzi wszystkie faktury
+            $invoices = $this->invoiceRepository->getAllInvoices();
+        } else {
+            // Użytkownik widzi tylko swoje faktury
+            $invoices = $this->invoiceRepository->getInvoicesByUserId((int)$currentUserId);
+        }
 
         $this->render('invoices', [
             'invoices' => $invoices,
-            'sort' => $sort
+            'sort' => $sort,
+            'role' => $currentUserRole
         ]);
     }
 
 
     // Szczegóły faktury
     public function details(): void {
+        $currentUserId = $_SESSION['user_id'] ?? null;
+        $currentUserRole = $_SESSION['user_role'] ?? 'user';
+
         $id = isset($_GET['?id']) ? (int)$_GET['?id'] : null;
 
         if ($id === null) {
@@ -43,6 +57,15 @@ class InvoiceController extends AppController {
             exit();
         }
 
+        if ($currentUserRole !== 'admin') {
+            $service = $this->serviceRepository->getServiceById($invoice['service_id']);
+            if ($service['owner_id'] !== (int)$currentUserId) {
+                $_SESSION['error'] = 'You are not allowed to view this invoice.';
+                header('Location: /invoices');
+                exit();
+            }
+        }
+
         $service = $this->serviceRepository->getServiceById($invoice['service_id']);
         $parts = $this->serviceRepository->getPartsByServiceId($invoice['service_id']);
         $client = $this->serviceRepository->getUserByServiceID($invoice['service_id']);
@@ -54,6 +77,7 @@ class InvoiceController extends AppController {
             'client' => $client
         ]);
     }
+
 
     // Generowanie faktury
     public function generateInvoice(int $serviceId): void {

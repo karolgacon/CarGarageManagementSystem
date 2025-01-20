@@ -68,15 +68,17 @@
                 <td><?php echo ucfirst($invoice['status']); ?></td>
                 <td>
                     <div class="action-buttons">
-                    <a href="/invoice_details?id=<?php echo $invoice['id']; ?>" class="btn btn-primary btn-sm">Details</a>
-                    <form action="/invoice_export" method="POST" target="_blank" class="inline">
-                        <input type="hidden" name="id" value="<?php echo $invoice['id']; ?>">
-                        <button type="submit" class="btn btn-secondary btn-sm">Export PDF</button>
-                    </form>
-                    <a href="/invoice_delete?id=<?php echo $invoice['id']; ?>" onclick="return confirm('Are you sure you want to delete this invoice?');" class="btn btn-danger btn-sm">Delete</a>
-                    <?php if ($invoice['status'] !== 'paid'): ?>
-                        <a href="/invoice_mark_paid?id=<?php echo $invoice['id']; ?>" class="btn btn-success btn-sm">Mark as Paid</a>
-                    <?php endif; ?>
+                        <a href="/invoice_details?id=<?php echo $invoice['id']; ?>" class="btn btn-primary btn-sm">Details</a>
+                        <form action="/invoice_export" method="POST" target="_blank" class="inline">
+                            <input type="hidden" name="id" value="<?php echo $invoice['id']; ?>">
+                            <button type="submit" class="btn btn-secondary btn-sm">Export PDF</button>
+                        </form>
+                        <?php if ($role === 'admin'): ?>
+                            <a href="/invoice_delete?id=<?php echo $invoice['id']; ?>" onclick="return confirm('Are you sure you want to delete this invoice?');" class="btn btn-danger btn-sm">Delete</a>
+                            <?php if ($invoice['status'] !== 'paid'): ?>
+                                <a href="/invoice_mark_paid?id=<?php echo $invoice['id']; ?>" class="btn btn-success btn-sm">Mark as Paid</a>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     </div>
                 </td>
             </tr>

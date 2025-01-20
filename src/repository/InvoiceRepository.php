@@ -102,16 +102,18 @@ class InvoiceRepository extends Repository {
 
     public function getInvoicesByUserId(int $userId): array {
         $stmt = $this->database->connect()->prepare("
-        SELECT i.*
+        SELECT i.*, u.name AS first_name, u.surname AS last_name
         FROM invoices i
         JOIN services s ON i.service_id = s.id
         JOIN vehicles v ON s.vehicle_id = v.id
+        JOIN users u ON v.owner_id = u.id
         WHERE v.owner_id = :user_id
     ");
         $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
     public function generateInvoice(int $serviceId): void {
         // Pobierz szczegóły usługi

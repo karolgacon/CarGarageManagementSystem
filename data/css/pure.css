@@ -576,3 +576,7 @@ form.needs-validation textarea:valid {
 .remove-part:hover {
     background-color: #c82333;
 }
+
+.inline{
+    display: inline;
+}

@@ -106,9 +106,10 @@ class ServiceRepository extends Repository
     public function getServiceById(int $id): ?array
     {
         $stmt = $this->database->connect()->prepare("
-        SELECT s.*, v.make, v.model
+        SELECT s.*, v.make, v.model, u.id as owner_id
         FROM services s
         JOIN vehicles v ON s.vehicle_id = v.id
+        JOIN users u ON v.owner_id = u.id
         WHERE s.id = :id
     ");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
