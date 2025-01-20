@@ -54,8 +54,8 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-success">Save Changes</button>
-        <a href="/services" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-success w-100">Save Changes</button>
+        <a href="/services" class="btn btn-secondary w-100">Cancel</a>
     </form>
 </div>
 <script src="/data/js/pure.js"></script>

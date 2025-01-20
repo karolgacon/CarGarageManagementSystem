@@ -16,7 +16,7 @@ class ServiceRepository extends Repository
         $stmt = $this->database->connect()->query("
             SELECT s.*, v.make, v.model
             FROM services s
-            JOIN vehicles v ON s.vehicle_id = v.id
+            LEFT JOIN vehicles v ON s.vehicle_id = v.id
         ");
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -176,7 +176,7 @@ class ServiceRepository extends Repository
 
     public function getServicesByUserId(int $userId): array {
         $stmt = $this->database->connect()->prepare("
-        SELECT s.*
+        SELECT s.*, v.make, v.model
         FROM services s
         JOIN vehicles v ON s.vehicle_id = v.id
         WHERE v.owner_id = :user_id
@@ -210,4 +210,6 @@ class ServiceRepository extends Repository
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
 }

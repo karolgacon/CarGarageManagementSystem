@@ -21,46 +21,61 @@ class ServiceController extends AppController {
 
     public function index()
     {
-        $services = $this->serviceRepository->getAllServices();
+        $currentUserId   = $_SESSION['user_id']   ?? null;
+        $currentUserRole = $_SESSION['user_role'] ?? 'user';
 
+        // Filtruj usługi w zależności od roli
+        if ($currentUserRole === 'admin') {
+            // Admin widzi wszystkie
+            $services = $this->serviceRepository->getAllServices();
+        } else {
+            // Zwykły user widzi tylko swoje (dla pojazdów, których jest właścicielem)
+            $services = $this->serviceRepository->getServicesByUserId((int)$currentUserId);
+        }
+
+        // Dorzucamy do każdej usługi części i wyliczamy total_cost
         foreach ($services as &$service) {
             $service['parts'] = $this->serviceRepository->getServiceDetails($service['id']);
-            $service['total_cost'] = $service['cost']; // Koszt serwisu
+            $service['total_cost'] = $service['cost'];
 
-            // Dodajemy koszt części
             foreach ($service['parts'] as $part) {
                 $service['total_cost'] += $part['total_cost'];
             }
         }
-
-        $this->render('services', ['services' => $services]);
+        $this->render('services', [
+            'services' => $services
+        ]);
     }
 
 
     public function add()
     {
+
+        $currentUserId   = $_SESSION['user_id']   ?? null;
+        $currentUserRole = $_SESSION['user_role'] ?? 'user';
         if ($this->isPost()) {
             $data = [
                 'vehicle_id' => $_POST['vehicle_id'],
                 'description' => $_POST['description'],
-                'status' => 'pending',
+                'status' => 'pending', // Domyślny status
                 'date' => $_POST['date'] ?? date('Y-m-d H:i:s'),
-                'cost' => $_POST['cost'],
+                'cost' => null, // Brak kosztu na tym etapie
             ];
 
-            $serviceId = $this->serviceRepository->addService($data);
+            $this->serviceRepository->addService($data);
 
-            foreach ($_POST['parts'] as $part) {
-                $partDetails = $this->inventoryRepository->getItemById($part['part_id']);
-                $totalCost = $partDetails->getPrice() * $part['quantity'];
-                $this->serviceRepository->addPartToService($serviceId, $part['part_id'], $part['quantity'], $totalCost);
-            }
-
+            $_SESSION['success'] = 'Service request submitted successfully!';
             header("Location: /services");
             exit();
         }
 
-        $vehicles = $this->vehicleRepository->getAllVehicles();
+        // Admin – może wybrać dowolny pojazd
+        if ($currentUserRole === 'admin') {
+            $vehicles = $this->vehicleRepository->getAllVehicles();
+        } else {
+            // User – tylko pojazdy, które należą do niego
+            $vehicles = $this->vehicleRepository->getVehiclesByOwner($currentUserId);
+        }
         $inventory = $this->inventoryRepository->getAllItems();
 
         $this->render('service_add', [
@@ -73,24 +88,26 @@ class ServiceController extends AppController {
     {
         if ($this->isPost()) {
             $id = (int)$_POST['id'];
+
+            // Tylko admin może edytować szczegóły
             $data = [
-                'vehicle_id' => $_POST['vehicle_id'],  // Dodaj vehicle_id
                 'description' => $_POST['description'],
-                'status' => $_POST['status'],
+                'status' => $_POST['status'], // Możliwość zmiany statusu
                 'date' => $_POST['date'] ?? date('Y-m-d H:i:s'),
-                'cost' => $_POST['cost']
+                'cost' => $_POST['cost'] ?? null, // Koszt wypełniany przez admina
             ];
 
             $this->serviceRepository->updateService($id, $data);
+            $_SESSION['success'] = 'Service updated successfully!';
             header("Location: /services");
             exit();
         }
 
         $id = (int)$_GET['?id'];
         $service = $this->serviceRepository->getServiceById($id);
-        $vehicles = $this->vehicleRepository->getAllVehicles();
-        $this->render('service_edit', ['service' => $service, 'vehicles' => $vehicles]);
+        $this->render('service_edit', ['service' => $service]);
     }
+
 
 
     public function delete() {
@@ -121,5 +138,51 @@ class ServiceController extends AppController {
         exit();
     }
 
+    public function accept()
+    {
+        $id = (int)$_GET['?id'];
+        $service = $this->serviceRepository->getServiceById($id);
+
+        if (!$service || $service['status'] !== 'pending') {
+            $_SESSION['error'] = 'Service not found or already processed!';
+            header("Location: /services");
+            exit();
+        }
+
+        if ($this->isPost()) {
+            // Dane przesłane przez formularz
+            $data = [
+                'id' => $id,
+                'vehicle_id' => $service['vehicle_id'],
+                'description' => $service['description'],
+                'cost' => $_POST['cost'],
+                'date' => $_POST['date'] ?? date('Y-m-d H:i:s'),
+                'status' => 'in_progress',
+            ];
+
+            $this->serviceRepository->updateService($id, $data);
+
+            // Obsługa części (jeśli zostały dodane)
+            $this->serviceRepository->removeAllPartsFromService($id);
+            if (!empty($_POST['parts'])) {
+                foreach ($_POST['parts'] as $part) {
+                    $partDetails = $this->inventoryRepository->getItemById($part['part_id']);
+                    $totalCost = $partDetails->getPrice() * $part['quantity'];
+                    $this->serviceRepository->addPartToService($id, $part['part_id'], $part['quantity'], $totalCost);
+                }
+            }
+
+            $_SESSION['success'] = 'Service has been accepted!';
+            header("Location: /services");
+            exit();
+        }
+
+        $inventory = $this->inventoryRepository->getAllItems();
+
+        $this->render('service_accept', [
+            'service' => $service,
+            'inventory' => $inventory
+        ]);
+    }
 
 }

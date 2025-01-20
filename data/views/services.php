@@ -31,22 +31,29 @@
         <tbody>
         <?php foreach ($services as $service): ?>
             <tr>
-                <td><?php echo $service['id']; ?></td>
-                <td><?php echo $service['make'] . ' ' . $service['model']; ?></td>
-                <td><?php echo $service['description']; ?></td>
-                <td><?php echo date('Y-m-d H:i', strtotime($service['date'])); ?></td>
-                <td><?php echo number_format($service['cost'], 2); ?> USD</td>
-                <td><?php echo number_format($service['total_cost'], 2); ?> USD</td>
-                <td><?php echo ucfirst($service['status']); ?></td>
+                <td><?php echo htmlspecialchars($service['id']); ?></td>
                 <td>
-                    <a href="/service_edit?id=<?php echo $service['id']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                    <a href="/service_delete?id=<?php echo $service['id']; ?>" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-sm">Delete</a>
-                    <?php if ($service['status'] !== 'completed'): ?>
+                    <?php echo isset($service['make'], $service['model'])
+                        ? htmlspecialchars($service['make'] . ' ' . $service['model'])
+                        : 'Unknown Vehicle'; ?>
+                </td>
+                <td><?php echo htmlspecialchars($service['description']); ?></td>
+                <td><?php echo htmlspecialchars(date('Y-m-d H:i', strtotime($service['date']))); ?></td>
+                <td><?php echo isset($service['cost']) ? number_format($service['cost'], 2) . ' USD' : 'N/A'; ?></td>
+                <td><?php echo isset($service['total_cost']) ? number_format($service['total_cost'], 2) . ' USD' : 'N/A'; ?></td>
+                <td><?php echo htmlspecialchars(ucfirst($service['status'])); ?></td>
+                <td>
+                    <?php if ($_SESSION['user_role'] === 'admin'): ?>
+                        <a href="/service_edit?id=<?php echo $service['id']; ?>" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="/service_delete?id=<?php echo $service['id']; ?>" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-sm">Delete</a>
+                    <?php if ($service['status'] === 'pending'): ?>
+                        <a href="/service_accept?id=<?php echo $service['id']; ?>" class="btn btn-success btn-sm">Accept</a>
+                    <?php elseif ($service['status'] !== 'completed'): ?>
                         <a href="/service_mark_completed?id=<?php echo $service['id']; ?>" class="btn btn-success btn-sm">Mark as Completed</a>
+                    <?php endif; ?>
                     <?php endif; ?>
                 </td>
             </tr>
-            <!-- Szczegóły części -->
             <?php if (!empty($service['parts'])): ?>
                 <tr>
                     <td colspan="8">
@@ -54,8 +61,8 @@
                         <ul>
                             <?php foreach ($service['parts'] as $part): ?>
                                 <li class="ml-4">
-                                    <?php echo $part['part_name']; ?> -
-                                    Quantity: <?php echo $part['quantity']; ?> -
+                                    <?php echo htmlspecialchars($part['part_name']); ?> -
+                                    Quantity: <?php echo htmlspecialchars($part['quantity']); ?> -
                                     Cost: <?php echo number_format($part['total_cost'], 2); ?> USD
                                 </li>
                             <?php endforeach; ?>
@@ -65,6 +72,7 @@
             <?php endif; ?>
         <?php endforeach; ?>
         </tbody>
+
     </table>
 
 </div>

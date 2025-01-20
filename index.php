@@ -54,6 +54,7 @@ Router::get('service_edit', 'ServiceController@edit');
 Router::post('service_edit', 'ServiceController@edit');
 Router::get('service_delete', 'ServiceController@delete');
 Router::get('service_mark_completed', 'ServiceController@complete');
+Router::get('service_accept', 'ServiceController@accept');
 
 
 Router::get('profile', 'UserController@profile');

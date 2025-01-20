@@ -45,8 +45,8 @@ class MainController extends AppController {
 
     private function showAdminDashboard($user) {
         // Pobierz dane globalne dla administratora
-        $invoices = $this->invoiceRepository->getInvoicesByUserId($user->getId());
-        $services = $this->serviceRepository->getServicesByUserId($user->getId());
+        $invoices = $this->invoiceRepository->getAllInvoices();
+        $services = $this->serviceRepository->getAllServices();
         $vehiclesCount = $this->vehicleRepository->countVehicles();
         $usersCount = count($this->userRepository->getAllUsers());
         $servicesCount = $this->serviceRepository->countServices();
