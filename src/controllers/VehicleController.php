@@ -15,27 +15,57 @@ class VehicleController extends AppController {
         $this->serviceRepository = new ServiceRepository();
     }
 
-    public function index(): void {
+    public function index(): void
+    {
         $search = $_GET['search'] ?? '';
         $sort = $_GET['sort'] ?? 'make_asc';
 
-        $vehicles = $this->vehicleRepository->getVehicles($search, $sort);
-        $owners=[];
-        foreach ($vehicles as $v){
-            $ownerID = $v->getOwnerId();
-            $owner = $this->userRepository->getUserById($ownerID);
+        // Załóżmy, że w sesji trzymasz user_id i user_role
+        $currentUserId = $_SESSION['user_id'] ?? null;
+        $currentUserRole = $_SESSION['user_role'] ?? 'user';
 
-            $owners[$ownerID]=[
-              'name' => $owner->getName(),
-                'surname' => $owner->getSurname()
-            ];
+        // Rozdzielamy logikę:
+        if ($currentUserRole === 'admin') {
+            // Administrator widzi wszystkie pojazdy
+            $vehicles = $this->vehicleRepository->getVehicles($search, $sort);
+        } else {
+            // Zwykły user widzi tylko swoje pojazdy
+            $vehicles = $this->vehicleRepository->getVehiclesByOwner($currentUserId, $search, $sort);
         }
-        $this->render('vehicles', ['vehicles' => $vehicles, 'owners' => $owners]);
+
+        // Tworzymy tablicę $owners -> [ownerID => ['name'=>'...', 'surname'=>'...']]
+        $owners = [];
+        foreach ($vehicles as $v) {
+            $ownerID = $v->getOwnerId();
+            // getUserById zwraca obiekt usera
+            $owner = $this->userRepository->getUserById($ownerID);
+            if ($owner) {
+                $owners[$ownerID] = [
+                    'name' => $owner->getName(),
+                    'surname' => $owner->getSurname()
+                ];
+            }
+        }
+
+        $this->render('vehicles', [
+            'vehicles' => $vehicles,
+            'owners'   => $owners
+        ]);
     }
 
-    public function add(): void {
-        $owners = $this->userRepository->getAllUsers(); // Pobieranie użytkowników jako właścicieli
 
+    public function add(): void {
+
+        $currentUserId = $_SESSION['user_id'] ?? null;
+        $currentUserRole = $_SESSION['user_role'] ?? 'user';
+
+        // Rozdzielamy logikę:
+        if ($currentUserRole === 'admin') {
+            $owners = $this->userRepository->getAllUsers(); // Pobieranie użytkowników jako właścicieli
+        } else {
+            $singleOwner = $this->userRepository->getUserById($currentUserId);
+            $owners = $singleOwner ? [$singleOwner] : [];
+        }
         if ($this->isPost()) {
             $data = [
                 'owner_id' => $_POST['owner_id'],

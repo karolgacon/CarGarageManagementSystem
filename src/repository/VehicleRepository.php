@@ -134,5 +134,51 @@ class VehicleRepository extends Repository {
         return (int) $result['count'];
     }
 
+    public function getVehiclesByOwner(int $ownerId, string $search = '', string $sort = 'make_asc'): array
+    {
+        $query = 'SELECT * FROM vehicles WHERE owner_id = :owner_id';
+        $params = [':owner_id' => $ownerId];
+
+        // Wyszukiwanie
+        if (!empty($search)) {
+            $query .= ' AND (make ILIKE :search OR model ILIKE :search OR vin ILIKE :search)';
+            $params[':search'] = '%' . $search . '%';
+        }
+
+        // Sortowanie
+        switch ($sort) {
+            case 'make_desc':
+                $query .= ' ORDER BY make DESC';
+                break;
+            case 'year_asc':
+                $query .= ' ORDER BY year ASC';
+                break;
+            case 'year_desc':
+                $query .= ' ORDER BY year DESC';
+                break;
+            case 'make_asc':
+            default:
+                $query .= ' ORDER BY make ASC';
+                break;
+        }
+
+        $stmt = $this->database->connect()->prepare($query);
+        $stmt->execute($params);
+
+        $vehicles = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $vehicles[] = new Vehicle(
+                $row['id'],
+                $row['owner_id'],
+                $row['make'],
+                $row['model'],
+                $row['year'],
+                $row['vin'],
+                $row['engine_capacity']
+            );
+        }
+
+        return $vehicles;
+    }
 
 }
