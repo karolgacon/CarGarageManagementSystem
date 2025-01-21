@@ -5,15 +5,15 @@
         <h5>GARAGE MASTER</h5>
     </div>
     <div class="menu">
-        <a href="mainview">Dashboard</a>
+        <a href="mainview" class="<?= $_SERVER['REQUEST_URI'] === '/mainview' ? 'active' : '' ?>">Dashboard</a>
         <?php if ($_SESSION['user_role'] === 'admin'): ?>
-            <a href="inventory">Inventory</a>
+            <a href="inventory" class="<?= $_SERVER['REQUEST_URI'] === '/inventory' ? 'active' : '' ?>">Inventory</a>
         <?php endif; ?>
         <?php if ($_SESSION['user_role'] === 'admin'): ?>
-            <a href="users">Users</a>
+            <a href="users" class="<?= $_SERVER['REQUEST_URI'] === '/users' ? 'active' : '' ?>">Users</a>
         <?php endif; ?>
-        <a href="vehicles">Vehicles</a>
-        <a href="services">Services</a>
-        <a href="invoices">Invoices</a>
+        <a href="vehicles" class="<?= $_SERVER['REQUEST_URI'] === '/vehicles' ? 'active' : '' ?>">Vehicles</a>
+        <a href="services" class="<?= $_SERVER['REQUEST_URI'] === '/services' ? 'active' : '' ?>">Services</a>
+        <a href="invoices" class="<?= $_SERVER['REQUEST_URI'] === '/invoices' ? 'active' : '' ?>">Invoices</a>
     </div>
 </div>
